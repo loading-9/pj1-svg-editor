@@ -158,3 +158,19 @@ test('successful save remembers path; failed read does not replace document or i
   const actual = new Repl(new Editor(new FileSvgStore()));
   assert.equal(actual.execute('read __nonexistent_pj1.svg').lines[0], 'error: cannot read file: __nonexistent_pj1.svg');
 });
+
+test('command arities and invalid numeric input fail without modifying history or document', () => {
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor); const codec = new SvgCodec();
+  repl.execute('init'); repl.execute('create rect r 1 2 3 4'); repl.execute('move r 1 1'); repl.execute('undo');
+  const before = codec.encode(editor.document);
+  for (const command of ['create rect x 1 2 3', 'create text t 1 2', 'create g x extra',
+    'create circle c 1 2 -3', 'create ellipse e 1 2 3 -4', 'create line l 1 2 3 Infinity',
+    'group single r', 'move r 1', 'scale r 1 2', 'set r fill', 'delete r extra',
+    'addto r', 'front r extra', 'back', 'ungroup', 'canvas 100', 'init 1 2 3',
+    'read', 'save a b', 'tree r extra', 'show', 'help extra', 'undo extra', 'redo extra',
+    'create rect "" 1 2 3 4', 'create g "bad id"', 'set r width NaN']) {
+    assert.match(repl.execute(command).lines[0]!, /^error:/, command);
+    assert.equal(codec.encode(editor.document), before, command);
+  }
+  repl.execute('redo'); assert.equal(editor.document.find('r').attributes().get('x'), '2');
+});

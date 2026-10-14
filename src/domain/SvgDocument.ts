@@ -71,7 +71,7 @@ export class SvgDocument {
 
   group(id: string, ids: readonly string[]): Group {
     this.assertAvailable(id);
-    if (!ids.length) throw new Error('group requires at least one shape');
+    if (ids.length < 2) throw new Error('group requires at least two shapes');
     if (new Set(ids).size !== ids.length) throw new Error('duplicate group member');
     const selected = ids.map(member => this.find(member));
     for (const shape of selected) {
