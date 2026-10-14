@@ -1,0 +1,17 @@
+{
+  "name": "pj1-svg-editor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PJ1 Phase 1: object-oriented TypeScript CLI SVG editor",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "cli": "npm run build --silent && node dist/src/cli/main.js",
+    "test": "npm run build --silent && node --test dist/tests/*.test.js",
+    "test:coverage": "npm run build --silent && node --experimental-test-coverage --test dist/tests/*.test.js",
+    "check:architecture": "node scripts/check-architecture.mjs",
+    "check": "npm run check:architecture && npm test"
+  },
+  "dependencies": { "@xmldom/xmldom": "^0.8.11" },
+  "devDependencies": { "@types/node": "^20.11.0", "typescript": "^5.6.3" }
+}

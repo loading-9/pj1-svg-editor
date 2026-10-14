@@ -1,0 +1,17 @@
+@startuml
+title PJ1 Phase 1 — 组件与依赖方向
+component "cli\nRepl / Tokenizer / main" as cli
+component "application\nEditor / History / Commands / ShapeFactory" as app
+component "domain\nSvgDocument / Shape / GeometryShape / Group\nRect / Circle / Ellipse / Line / Text" as domain
+component "infrastructure\nSvgCodec / FileSvgStore" as infra
+interface "SvgStore" as port
+cli --> app
+cli --> infra : composition root
+app --> domain
+app --> port
+infra ..|> port
+infra --> domain
+note bottom of domain
+  不依赖 application、CLI、Node IO 或 XML 库
+end note
+@enduml
