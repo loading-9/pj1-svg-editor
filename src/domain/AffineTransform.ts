@@ -48,6 +48,6 @@ export class AffineTransform {
   }
 
   toSvg(): string {
-    return `matrix(${[this.a, this.b, this.c, this.d, this.e, this.f].map(Numbers.format).join(' ')})`;
+    return `matrix(${[this.a, this.b, this.c, this.d, this.e, this.f].map(value => Numbers.format(value)).join(' ')})`;
   }
 }

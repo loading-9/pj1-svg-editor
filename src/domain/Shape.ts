@@ -27,7 +27,7 @@ export abstract class Shape {
 
   isAncestorOf(shape: Shape): boolean {
     for (let parent = shape.parent; parent; parent = parent.parent) {
-      if (parent === this) return true;
+      if ((parent as Shape) === this) return true;
     }
     return false;
   }
