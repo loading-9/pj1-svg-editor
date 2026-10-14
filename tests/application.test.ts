@@ -5,6 +5,22 @@ import { CommandRegistry } from '../src/application/CommandRegistry.js';
 import { TreeRenderer } from '../src/application/TreeRenderer.js';
 import { MemoryStore } from './MemoryStore.js';
 
+test('save without a path keeps the read source after an explicit save-as', () => {
+  const store = new MemoryStore(); const editor = new Editor(store);
+  editor.read('source.svg');
+  editor.save('copy.svg');
+  assert.equal(editor.save(), 'saved to source.svg (0 elements)');
+  store.fail = true;
+  assert.throws(() => editor.read('failed.svg'), /cannot read file/);
+  assert.throws(() => editor.save('failed-copy.svg'), /cannot write file/);
+  store.fail = false;
+  assert.equal(editor.save(), 'saved to source.svg (0 elements)');
+  editor.init(100, 100);
+  assert.throws(() => editor.save(), /no file path/);
+  editor.save('new.svg');
+  assert.equal(editor.save(), 'saved to new.svg (0 elements)');
+});
+
 test('one command one history entry; branch invalidation and display transparency', () => {
   const editor = new Editor(new MemoryStore()); const registry = new CommandRegistry();
   const run = (...tokens: string[]) => registry.run(editor, tokens);

@@ -8,8 +8,23 @@ import { FileSvgStore } from '../src/infrastructure/FileSvgStore.js';
 import { SvgDocument } from '../src/domain/SvgDocument.js';
 import { TreeRenderer } from '../src/application/TreeRenderer.js';
 import { Text } from '../src/domain/Text.js';
+import { Editor } from '../src/application/Editor.js';
 
 const codec = new SvgCodec();
+
+test('save-as writes a copy while a later default save still writes the imported file', () => {
+  const directory = mkdtempSync(join(tmpdir(), 'pj1-save-source-'));
+  try {
+    const store = new FileSvgStore();
+    const source = join(directory, 'source.svg'); const copy = join(directory, 'copy.svg');
+    store.write(source, new SvgDocument(100, 100));
+    const editor = new Editor(store);
+    editor.read(source); editor.canvas(200, 100); editor.save(copy);
+    editor.canvas(300, 100); editor.save();
+    assert.equal(store.read(source).document.width, 300);
+    assert.equal(store.read(copy).document.width, 200);
+  } finally { rmSync(directory, { recursive: true, force: true }); }
+});
 
 test('attachment external SVG imports all seven elements and allocates rect1', () => {
   const { document, warnings } = codec.decode(readFileSync('examples/other.svg', 'utf8'));
