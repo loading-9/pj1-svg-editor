@@ -2,22 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Editor } from '../src/application/Editor.js';
 import { CommandRegistry } from '../src/application/CommandRegistry.js';
-import type { SvgStore } from '../src/application/SvgStore.js';
-import { SvgDocument } from '../src/domain/SvgDocument.js';
 import { TreeRenderer } from '../src/application/TreeRenderer.js';
-
-class MemoryStore implements SvgStore {
-  private saved = new SvgDocument();
-  fail = false;
-  read(): { document: SvgDocument; warnings: string[] } {
-    if (this.fail) throw new Error('cannot read file: fail.svg');
-    return { document: this.saved.clone(), warnings: [] };
-  }
-  write(_path: string, document: SvgDocument): void {
-    if (this.fail) throw new Error('cannot write file: fail.svg');
-    this.saved = document.clone();
-  }
-}
+import { MemoryStore } from './MemoryStore.js';
 
 test('one command one history entry; branch invalidation and display transparency', () => {
   const editor = new Editor(new MemoryStore()); const registry = new CommandRegistry();
