@@ -4,6 +4,7 @@ import { AddToCommand } from './commands/AddToCommand.js';
 import { CanvasCommand } from './commands/CanvasCommand.js';
 import { CreateCommand } from './commands/CreateCommand.js';
 import { DeleteCommand } from './commands/DeleteCommand.js';
+import { ExitCommand } from './commands/ExitCommand.js';
 import { GroupCommand } from './commands/GroupCommand.js';
 import { HelpCommand } from './commands/HelpCommand.js';
 import { InitCommand } from './commands/InitCommand.js';
@@ -32,11 +33,12 @@ export class CommandRegistry {
     ['tree', () => new TreeCommand()], ['show', () => new ShowCommand()],
     ['undo', () => new UndoCommand()], ['redo', () => new RedoCommand()],
     ['help', () => new HelpCommand(this.help())],
+    ['exit', () => new ExitCommand()], ['quit', () => new ExitCommand()],
   ]);
   private help(): string[] {
     return [
-      ...[...this.factories].filter(([name]) => name !== 'help').map(([, create]) => create().syntax),
-      'help', 'exit (or quit; EOF also exits)',
+      ...[...this.factories].filter(([name]) => name !== 'help' && name !== 'quit').map(([, create]) => create().syntax),
+      'help', 'quit (alias of exit; EOF also exits)',
       'create rect <id> <x> <y> <w> <h> [fill] [in <containerId>]',
       'create circle <id> <cx> <cy> <r> [fill] [in <containerId>]',
       'create ellipse <id> <cx> <cy> <rx> <ry> [fill] [in <containerId>]',
@@ -47,11 +49,12 @@ export class CommandRegistry {
       'Double-quote arguments containing spaces. Lines beginning with # are comments.',
     ];
   }
-  run(editor: Editor, tokens: readonly string[]): readonly string[] {
+  run(editor: Editor, tokens: readonly string[]): { lines: readonly string[]; exit: boolean } {
     const name = tokens[0];
-    if (name === undefined) return [];
+    if (name === undefined) return { lines: [], exit: false };
     const create = this.factories.get(name);
     if (!create) throw new Error(`unknown command: ${name}`);
-    return create().run(editor, tokens.slice(1));
+    const command = create();
+    return { lines: command.run(editor, tokens.slice(1)), exit: command.exits };
   }
 }

@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "cli": "npm run build --silent && node dist/src/cli/main.js",
+    "demo": "npm run build --silent && node scripts/replay.mjs",
     "test": "npm run build --silent && node --test dist/tests",
     "test:coverage": "npm run build --silent && node --experimental-test-coverage --test dist/tests",
     "check:architecture": "node scripts/check-architecture.mjs",
