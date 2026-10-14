@@ -1,4 +1,4 @@
-# 附件 6.1 Version A：容器与叶子的统一操作。
+# 两节点流程图：容器与叶子的统一操作。
 init 800 600
 create g flowchart
 create g node1 in flowchart

@@ -3,235 +3,245 @@
 > npm run build --silent && node scripts/test.mjs --coverage
 
 TAP version 13
-# Subtest: one command one history entry; branch invalidation and display transparency
-ok 1 - one command one history entry; branch invalidation and display transparency
+# Subtest: save without a path keeps the read source after an explicit save-as
+ok 1 - save without a path keeps the read source after an explicit save-as
   ---
-  duration_ms: 5.0115
+  duration_ms: 2.6584
+  ...
+# Subtest: one command one history entry; branch invalidation and display transparency
+ok 2 - one command one history entry; branch invalidation and display transparency
+  ---
+  duration_ms: 4.2278
   ...
 # Subtest: all IO barriers clear history, and the next edit enables a fresh history
-ok 2 - all IO barriers clear history, and the next edit enables a fresh history
+ok 3 - all IO barriers clear history, and the next edit enables a fresh history
   ---
-  duration_ms: 1.7193
+  duration_ms: 0.6222
   ...
 # Subtest: failed edits, IO, and validation preserve document and redo history
-ok 3 - failed edits, IO, and validation preserve document and redo history
+ok 4 - failed edits, IO, and validation preserve document and redo history
   ---
-  duration_ms: 2.4446
+  duration_ms: 1.7808
   ...
 # Subtest: group deletion and nested ungroup are single undo units
-ok 4 - group deletion and nested ungroup are single undo units
+ok 5 - group deletion and nested ungroup are single undo units
   ---
-  duration_ms: 2.9734
+  duration_ms: 1.9946
   ...
 # Subtest: tokenizer handles comments, hex colors, empty quotes, Unicode and Windows paths
-ok 5 - tokenizer handles comments, hex colors, empty quotes, Unicode and Windows paths
+ok 6 - tokenizer handles comments, hex colors, empty quotes, Unicode and Windows paths
   ---
-  duration_ms: 2.0365
+  duration_ms: 2.0346
   ...
 # Subtest: REPL emits single-line errors, continues after failure, and exit is dispatched centrally
-ok 6 - REPL emits single-line errors, continues after failure, and exit is dispatched centrally
+ok 7 - REPL emits single-line errors, continues after failure, and exit is dispatched centrally
   ---
-  duration_ms: 1.9483
+  duration_ms: 1.9127
   ...
 # Subtest: attachment session replays through actual CLI process
-ok 7 - attachment session replays through actual CLI process
+ok 8 - attachment session replays through actual CLI process
   ---
-  duration_ms: 300.692
+  duration_ms: 315.5267
   ...
 # Subtest: flowchart replay moves rect and text together and saves the restored coordinates
-ok 8 - flowchart replay moves rect and text together and saves the restored coordinates
+ok 9 - flowchart replay moves rect and text together and saves the restored coordinates
   ---
-  duration_ms: 12.761
+  duration_ms: 12.2619
   ...
 # Subtest: EOF exits and explicit quit discards following script commands
-ok 9 - EOF exits and explicit quit discards following script commands
+ok 10 - EOF exits and explicit quit discards following script commands
   ---
-  duration_ms: 505.5074
+  duration_ms: 564.2294
   ...
 # Subtest: geometry, clone isolation and polymorphic group edits
-ok 10 - geometry, clone isolation and polymorphic group edits
+ok 11 - geometry, clone isolation and polymorphic group edits
   ---
-  duration_ms: 3.079
+  duration_ms: 2.8773
   ...
 # Subtest: group members retain document order; ancestor cycles are rejected
-ok 11 - group members retain document order; ancestor cycles are rejected
+ok 12 - group members retain document order; ancestor cycles are rejected
   ---
-  duration_ms: 1.3669
+  duration_ms: 1.2814
   ...
 # Subtest: nested ungroup lifts children into exact original slot
-ok 12 - nested ungroup lifts children into exact original slot
+ok 13 - nested ungroup lifts children into exact original slot
   ---
-  duration_ms: 0.9306
+  duration_ms: 0.9818
   ...
 # Subtest: reparent compensates inherited affine transforms
-ok 13 - reparent compensates inherited affine transforms
+ok 14 - reparent compensates inherited affine transforms
   ---
-  duration_ms: 0.295
+  duration_ms: 0.3071
   ...
 # Subtest: rect: move, scale, exact undo/redo and attribute whitelist
-ok 14 - rect: move, scale, exact undo/redo and attribute whitelist
+ok 15 - rect: move, scale, exact undo/redo and attribute whitelist
   ---
-  duration_ms: 6.2949
+  duration_ms: 7.4859
   ...
 # Subtest: circle: move, scale, exact undo/redo and attribute whitelist
-ok 15 - circle: move, scale, exact undo/redo and attribute whitelist
+ok 16 - circle: move, scale, exact undo/redo and attribute whitelist
   ---
-  duration_ms: 3.1137
+  duration_ms: 1.9175
   ...
 # Subtest: ellipse: move, scale, exact undo/redo and attribute whitelist
-ok 16 - ellipse: move, scale, exact undo/redo and attribute whitelist
+ok 17 - ellipse: move, scale, exact undo/redo and attribute whitelist
   ---
-  duration_ms: 1.4729
+  duration_ms: 1.0519
   ...
 # Subtest: line: move, scale, exact undo/redo and attribute whitelist
-ok 17 - line: move, scale, exact undo/redo and attribute whitelist
+ok 18 - line: move, scale, exact undo/redo and attribute whitelist
   ---
-  duration_ms: 1.2103
+  duration_ms: 1.2124
   ...
 # Subtest: text: move, scale, exact undo/redo and attribute whitelist
-ok 18 - text: move, scale, exact undo/redo and attribute whitelist
+ok 19 - text: move, scale, exact undo/redo and attribute whitelist
   ---
-  duration_ms: 1.1986
+  duration_ms: 1.2926
   ...
 # Subtest: default styles are omitted, optional fills/strokes and in suffix work for every built-in
-ok 19 - default styles are omitted, optional fills/strokes and in suffix work for every built-in
+ok 20 - default styles are omitted, optional fills/strokes and in suffix work for every built-in
   ---
-  duration_ms: 1.7493
+  duration_ms: 1.92
   ...
 # Subtest: nested group scale multiplies every geometric field exactly once and preserves styles
-ok 20 - nested group scale multiplies every geometric field exactly once and preserves styles
+ok 21 - nested group scale multiplies every geometric field exactly once and preserves styles
   ---
-  duration_ms: 1.8851
+  duration_ms: 2.0103
   ...
 # Subtest: front/back/addto/delete change only the selected subtree and one undo restores exact XML
-ok 21 - front/back/addto/delete change only the selected subtree and one undo restores exact XML
+ok 22 - front/back/addto/delete change only the selected subtree and one undo restores exact XML
   ---
-  duration_ms: 3.4501
+  duration_ms: 4.7679
   ...
 # Subtest: exact required error messages preserve XML and the redo branch
-ok 22 - exact required error messages preserve XML and the redo branch
+ok 23 - exact required error messages preserve XML and the redo branch
   ---
-  duration_ms: 1.987
+  duration_ms: 2.0715
   ...
 # Subtest: overflow during a recursive edit is atomic, even after an earlier child has changed
-ok 23 - overflow during a recursive edit is atomic, even after an earlier child has changed
+ok 24 - overflow during a recursive edit is atomic, even after an earlier child has changed
   ---
-  duration_ms: 0.9237
+  duration_ms: 1.0375
   ...
 # Subtest: group across different parents uses nearest common ancestor and document order
-ok 24 - group across different parents uses nearest common ancestor and document order
+ok 25 - group across different parents uses nearest common ancestor and document order
   ---
-  duration_ms: 0.8422
+  duration_ms: 0.9009
   ...
 # Subtest: tree [id], show parent and help expose the complete editing interface
-ok 25 - tree [id], show parent and help expose the complete editing interface
+ok 26 - tree [id], show parent and help expose the complete editing interface
   ---
-  duration_ms: 1.2017
+  duration_ms: 1.2964
   ...
 # Subtest: successful save remembers path; failed read does not replace document or its path
-ok 26 - successful save remembers path; failed read does not replace document or its path
+ok 27 - successful save remembers path; failed read does not replace document or its path
   ---
-  duration_ms: 0.7213
+  duration_ms: 0.8231
   ...
 # Subtest: command arities and invalid numeric input fail without modifying history or document
-ok 27 - command arities and invalid numeric input fail without modifying history or document
+ok 28 - command arities and invalid numeric input fail without modifying history or document
   ---
-  duration_ms: 2.4588
+  duration_ms: 2.7572
+  ...
+# Subtest: save-as writes a copy while a later default save still writes the imported file
+ok 29 - save-as writes a copy while a later default save still writes the imported file
+  ---
+  duration_ms: 21.3119
   ...
 # Subtest: attachment external SVG imports all seven elements and allocates rect1
-ok 28 - attachment external SVG imports all seven elements and allocates rect1
+ok 30 - attachment external SVG imports all seven elements and allocates rect1
   ---
-  duration_ms: 6.6329
+  duration_ms: 3.1735
   ...
 # Subtest: missing IDs avoid ALL explicit IDs, including later siblings and root
-ok 29 - missing IDs avoid ALL explicit IDs, including later siblings and root
+ok 31 - missing IDs avoid ALL explicit IDs, including later siblings and root
   ---
-  duration_ms: 0.9052
+  duration_ms: 0.5752
   ...
 # Subtest: round-trip preserves hierarchy, defaults, styles, Unicode and escaped text
-ok 30 - round-trip preserves hierarchy, defaults, styles, Unicode and escaped text
+ok 32 - round-trip preserves hierarchy, defaults, styles, Unicode and escaped text
   ---
-  duration_ms: 4.0998
+  duration_ms: 2.5158
   ...
 # Subtest: all six built-ins serialize and imported transform lists round-trip
-ok 31 - all six built-ins serialize and imported transform lists round-trip
+ok 33 - all six built-ins serialize and imported transform lists round-trip
   ---
-  duration_ms: 4.2091
+  duration_ms: 3.9272
   ...
 # Subtest: malformed/unsupported SVG is rejected instead of silently losing data
-ok 32 - malformed/unsupported SVG is rejected instead of silently losing data
+ok 34 - malformed/unsupported SVG is rejected instead of silently losing data
   ---
-  duration_ms: 2.9317
+  duration_ms: 3.6991
   ...
 # Subtest: unloaded composite marker downgrades to ordinary g
-ok 33 - unloaded composite marker downgrades to ordinary g
+ok 35 - unloaded composite marker downgrades to ordinary g
   ---
-  duration_ms: 0.3595
+  duration_ms: 0.506
   ...
 # Subtest: FileSvgStore writes UTF-8 atomically, overwrites, and cleans failed write temps
-ok 34 - FileSvgStore writes UTF-8 atomically, overwrites, and cleans failed write temps
+ok 36 - FileSvgStore writes UTF-8 atomically, overwrites, and cleans failed write temps
   ---
-  duration_ms: 17.1297
+  duration_ms: 19.055
   ...
-1..34
-# tests 34
+1..36
+# tests 36
 # suites 0
-# pass 34
+# pass 36
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 1167.8838
+# duration_ms 1306.3914
 # start of coverage report
 # file | line % | branch % | funcs % | uncovered lines
-# dist\src\application\Arguments.js | 100.00 | 90.91 | 100.00 | 
-# dist\src\application\Command.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\CommandRegistry.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\AddToCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\CanvasCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\CreateCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\DeleteCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\ExitCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\GroupCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\HelpCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\InitCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\MoveCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\ReadCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\RedoCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\SaveCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\ScaleCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\SetCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\ShowCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\TreeCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\UndoCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\UngroupCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\commands\ZOrderCommand.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\EditCommand.js | 100.00 | 75.00 | 100.00 | 
-# dist\src\application\Editor.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\History.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\ShapeFactory.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\application\TreeRenderer.js | 100.00 | 91.67 | 100.00 | 
+# dist\src\application\Arguments.js | 100.00 | 90.91 | 100.00 |
+# dist\src\application\Command.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\CommandRegistry.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\AddToCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\CanvasCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\CreateCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\DeleteCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\ExitCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\GroupCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\HelpCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\InitCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\MoveCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\ReadCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\RedoCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\SaveCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\ScaleCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\SetCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\ShowCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\TreeCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\UndoCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\UngroupCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\commands\ZOrderCommand.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\EditCommand.js | 100.00 | 75.00 | 100.00 |
+# dist\src\application\Editor.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\History.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\ShapeFactory.js | 100.00 | 100.00 | 100.00 |
+# dist\src\application\TreeRenderer.js | 100.00 | 91.67 | 100.00 |
 # dist\src\cli\main.js | 76.92 | 50.00 | 0.00 | 9, 10, 11
 # dist\src\cli\Repl.js | 91.49 | 81.82 | 100.00 | 27, 28, 29, 30
-# dist\src\cli\Tokenizer.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\domain\AffineTransform.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\domain\Circle.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\domain\Ellipse.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\domain\GeometryShape.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\domain\Group.js | 100.00 | 87.50 | 100.00 | 
-# dist\src\domain\Line.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\domain\Numbers.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\domain\Rect.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\domain\Shape.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\domain\SvgDocument.js | 100.00 | 98.39 | 100.00 | 
-# dist\src\domain\Text.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\infrastructure\FileSvgStore.js | 100.00 | 100.00 | 100.00 | 
-# dist\src\infrastructure\SvgCodec.js | 97.24 | 95.00 | 100.00 | 25, 26, 34, 35
-# dist\tests\application.test.js | 100.00 | 95.83 | 100.00 | 
-# dist\tests\cli.test.js | 100.00 | 92.31 | 100.00 | 
-# dist\tests\domain.test.js | 100.00 | 94.12 | 100.00 | 
-# dist\tests\MemoryStore.js | 100.00 | 100.00 | 100.00 | 
-# dist\tests\requirements.test.js | 100.00 | 97.44 | 100.00 | 
-# dist\tests\svg.test.js | 100.00 | 93.33 | 100.00 | 
-# all files | 99.46 | 96.94 | 99.71 |
+# dist\src\cli\Tokenizer.js | 100.00 | 100.00 | 100.00 |
+# dist\src\domain\AffineTransform.js | 100.00 | 100.00 | 100.00 |
+# dist\src\domain\Circle.js | 100.00 | 100.00 | 100.00 |
+# dist\src\domain\Ellipse.js | 100.00 | 100.00 | 100.00 |
+# dist\src\domain\GeometryShape.js | 100.00 | 100.00 | 100.00 |
+# dist\src\domain\Group.js | 100.00 | 87.50 | 100.00 |
+# dist\src\domain\Line.js | 100.00 | 100.00 | 100.00 |
+# dist\src\domain\Numbers.js | 100.00 | 100.00 | 100.00 |
+# dist\src\domain\Rect.js | 100.00 | 100.00 | 100.00 |
+# dist\src\domain\Shape.js | 100.00 | 100.00 | 100.00 |
+# dist\src\domain\SvgDocument.js | 100.00 | 98.39 | 100.00 |
+# dist\src\domain\Text.js | 100.00 | 100.00 | 100.00 |
+# dist\src\infrastructure\FileSvgStore.js | 100.00 | 100.00 | 100.00 |
+# dist\src\infrastructure\SvgCodec.js | 97.24 | 95.06 | 100.00 | 25, 26, 34, 35
+# dist\tests\application.test.js | 100.00 | 96.43 | 100.00 |
+# dist\tests\cli.test.js | 100.00 | 92.31 | 100.00 |
+# dist\tests\domain.test.js | 100.00 | 94.12 | 100.00 |
+# dist\tests\MemoryStore.js | 100.00 | 100.00 | 100.00 |
+# dist\tests\requirements.test.js | 100.00 | 97.44 | 100.00 |
+# dist\tests\svg.test.js | 100.00 | 93.75 | 100.00 |
+# all files | 99.47 | 96.98 | 99.72 |
 # end of coverage report

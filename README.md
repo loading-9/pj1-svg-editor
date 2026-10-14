@@ -27,8 +27,8 @@ npm run demo -- examples/session.txt
 npm run check
 ```
 
-demo 脚本跨平台执行，自动创建 `examples/generated/`。session 中有两条按附件保留的预期错误。仅支持本阶段六种图形；box 属后续插件阶段。
+demo 脚本跨平台执行，自动创建 `examples/generated/`。session 示例包含两条预期错误，用于演示非法分组和保存后的历史屏障。仅支持本阶段六种图形；box 属后续插件阶段。
 
-架构方案、PlantUML 图、真实 AI 协作迭代、一致性自查、功能验收及质量保证见 [doc/README.md](doc/README.md)。验证证据见 [doc/verification.md](doc/verification.md)。
+架构方案、PlantUML 图、开发过程、一致性自查、功能验收及质量保证见 [doc/README.md](doc/README.md)。验证证据见 [doc/verification.md](doc/verification.md)，逐条复核结果见 [doc/requirements-audit.md](doc/requirements-audit.md)。
 
 逐步开发提交保存在 Git 历史中，最终版本由附注标签 `final` 标记。

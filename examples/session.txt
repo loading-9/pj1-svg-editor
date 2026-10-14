@@ -1,4 +1,4 @@
-# 附件 6 的完整操作序列；唯一调整是显式 examples 路径。
+# 综合编辑示例：图形创建、分组、历史、保存与外部 SVG 导入。
 init 800 600
 create rect bg 0 0 800 600 #ffffff
 create text title 20 40 "My Diagram"
