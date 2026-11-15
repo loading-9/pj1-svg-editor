@@ -8,6 +8,9 @@
     },
     {
       "module": "./plugins/box"
+    },
+    {
+      "module": "./plugins/tree-star"
     }
   ]
 }
