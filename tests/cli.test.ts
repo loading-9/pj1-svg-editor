@@ -1,3 +1,4 @@
+import { Defaults } from '../src/host/Defaults.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -7,8 +8,6 @@ import { tmpdir } from 'node:os';
 import { Tokenizer } from '../src/cli/Tokenizer.js';
 import { Repl } from '../src/cli/Repl.js';
 import { Editor } from '../src/application/Editor.js';
-import { FileSvgStore } from '../src/infrastructure/FileSvgStore.js';
-import { SvgCodec } from '../src/infrastructure/SvgCodec.js';
 
 test('tokenizer handles comments, hex colors, empty quotes, Unicode and Windows paths', () => {
   const tokenizer = new Tokenizer();
@@ -22,7 +21,7 @@ test('tokenizer handles comments, hex colors, empty quotes, Unicode and Windows 
 });
 
 test('REPL emits single-line errors, continues after failure, and exit is dispatched centrally', () => {
-  const repl = new Repl(new Editor(new FileSvgStore()));
+  const repl = new Repl(new Editor(Defaults.store()), Defaults.commands());
   assert.equal(repl.execute('tree').lines[0], "error: no document. use 'init' or 'read' first");
   assert.match(repl.execute('unknown').lines[0]!, /^error: unknown command/);
   assert.deepEqual(repl.execute('  # hi').lines, []);
@@ -46,7 +45,7 @@ test('attachment session replays through actual CLI process', () => {
     assert.match(result.stdout, /warning: assigned id rect1 to unnamed <rect>/);
     assert.match(result.stdout, /svg \(400x300\)/);
     assert.equal(result.stdout.split('\n').filter(line => line.startsWith('error:')).length, 2);
-    const saved = new SvgCodec().decode(readFileSync(target, 'utf8')).document;
+    const saved = Defaults.codec().decode(readFileSync(target, 'utf8')).document;
     assert.equal(saved.count, 5); assert.equal(saved.find('c1').attributes().get('cx'), '130');
     assert.equal(saved.find('title').content, 'My Diagram'); assert.equal(saved.find('box').parent?.id, 'markers');
   } finally { rmSync(directory, { recursive: true, force: true }); }
@@ -57,7 +56,7 @@ test('flowchart replay moves rect and text together and saves the restored coord
   try {
     const target = join(directory, 'flowchart.svg');
     const session = readFileSync('examples/flowchart.txt', 'utf8').replace('save examples/generated/flowchart.svg', `save "${target}"`);
-    const editor = new Editor(new FileSvgStore()); const repl = new Repl(editor);
+    const editor = new Editor(Defaults.store()); const repl = new Repl(editor, Defaults.commands());
     for (const line of session.split(/\r?\n/)) {
       const result = repl.execute(line);
       assert.ok(result.lines.every(message => !message.startsWith('error:')), result.lines.join('\n'));
@@ -66,7 +65,7 @@ test('flowchart replay moves rect and text together and saves the restored coord
         assert.equal(editor.document.find('process-label').attributes().get('y'), '235');
       }
     }
-    const saved = new FileSvgStore().read(target).document;
+    const saved = Defaults.store().read(target).document;
     assert.equal(saved.count, 8); assert.equal(saved.find('process').attributes().get('y'), '100');
     assert.equal(saved.find('process-label').content, '处理数据 v2');
   } finally { rmSync(directory, { recursive: true, force: true }); }

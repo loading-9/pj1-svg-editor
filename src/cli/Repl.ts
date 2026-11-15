@@ -6,8 +6,7 @@ import { Tokenizer } from './Tokenizer.js';
 
 export class Repl {
   private readonly tokenizer = new Tokenizer();
-  private readonly commands = new CommandRegistry();
-  constructor(private readonly editor: Editor) {}
+  constructor(private readonly editor: Editor, private readonly commands: CommandRegistry) {}
   execute(line: string): { lines: readonly string[]; exit: boolean } {
     try {
       const tokens = this.tokenizer.tokenize(line);

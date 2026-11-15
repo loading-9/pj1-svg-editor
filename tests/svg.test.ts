@@ -1,21 +1,20 @@
+import { Defaults } from '../src/host/Defaults.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, readdirSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { SvgCodec } from '../src/infrastructure/SvgCodec.js';
-import { FileSvgStore } from '../src/infrastructure/FileSvgStore.js';
 import { SvgDocument } from '../src/domain/SvgDocument.js';
 import { TreeRenderer } from '../src/application/TreeRenderer.js';
-import { Text } from '../src/domain/Text.js';
+import { Text } from '../plugins/builtin-shapes/Text.js';
 import { Editor } from '../src/application/Editor.js';
 
-const codec = new SvgCodec();
+const codec = Defaults.codec();
 
 test('save-as writes a copy while a later default save still writes the imported file', () => {
   const directory = mkdtempSync(join(tmpdir(), 'pj1-save-source-'));
   try {
-    const store = new FileSvgStore();
+    const store = Defaults.store();
     const source = join(directory, 'source.svg'); const copy = join(directory, 'copy.svg');
     store.write(source, new SvgDocument(100, 100));
     const editor = new Editor(store);
@@ -91,7 +90,7 @@ test('unloaded composite marker downgrades to ordinary g', () => {
 test('FileSvgStore writes UTF-8 atomically, overwrites, and cleans failed write temps', () => {
   const directory = mkdtempSync(join(tmpdir(), 'pj1-svg-'));
   try {
-    const store = new FileSvgStore(); const document = new SvgDocument(); const text = new Text('t');
+    const store = Defaults.store(); const document = new SvgDocument(); const text = new Text('t');
     text.initialize(['10', '20', '中文 & <SVG>']); document.add(text);
     const path = join(directory, 'file with spaces.svg');
     store.write(path, document); document.resize(200, 100); store.write(path, document);

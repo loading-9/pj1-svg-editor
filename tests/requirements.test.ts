@@ -1,9 +1,8 @@
+import { Defaults } from '../src/host/Defaults.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Editor } from '../src/application/Editor.js';
 import { Repl } from '../src/cli/Repl.js';
-import { SvgCodec } from '../src/infrastructure/SvgCodec.js';
-import { FileSvgStore } from '../src/infrastructure/FileSvgStore.js';
 import { MemoryStore } from './MemoryStore.js';
 
 const cases = [
@@ -16,11 +15,11 @@ const cases = [
 
 for (const shape of cases) {
   test(`${shape.type}: move, scale, exact undo/redo and attribute whitelist`, () => {
-    const editor = new Editor(new MemoryStore()); const repl = new Repl(editor);
+    const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands());
     const run = (line: string) => {
       const result = repl.execute(line); assert.ok(!result.lines[0]?.startsWith('error:'), result.lines.join('\n'));
     };
-    const codec = new SvgCodec();
+    const codec = Defaults.codec();
     run('init'); run(`create ${shape.type} s ${shape.params}`);
     const original = codec.encode(editor.document);
     run('move s 10 20');
@@ -39,7 +38,7 @@ for (const shape of cases) {
 }
 
 test('default styles are omitted, optional fills/strokes and in suffix work for every built-in', () => {
-  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor);
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands());
   repl.execute('init'); repl.execute('create g scene');
   for (const shape of cases) {
     assert.ok(!repl.execute(`create ${shape.type} ${shape.type} ${shape.params} in scene`).lines[0]?.startsWith('error:'));
@@ -56,7 +55,7 @@ test('default styles are omitted, optional fills/strokes and in suffix work for 
 });
 
 test('nested group scale multiplies every geometric field exactly once and preserves styles', () => {
-  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor); const codec = new SvgCodec();
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands()); const codec = Defaults.codec();
   repl.execute('init'); repl.execute('create g outer'); repl.execute('create g inner in outer');
   for (const shape of cases) repl.execute(`create ${shape.type} ${shape.type} ${shape.params} in inner`);
   repl.execute('set outer fill blue'); repl.execute('set inner stroke-width 3');
@@ -71,7 +70,7 @@ test('nested group scale multiplies every geometric field exactly once and prese
 });
 
 test('front/back/addto/delete change only the selected subtree and one undo restores exact XML', () => {
-  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor); const codec = new SvgCodec();
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands()); const codec = Defaults.codec();
   repl.execute('init');
   for (const id of ['a', 'b', 'c']) repl.execute(`create rect ${id} 1 2 3 4`);
   repl.execute('create g group');
@@ -96,7 +95,7 @@ test('front/back/addto/delete change only the selected subtree and one undo rest
 });
 
 test('exact required error messages preserve XML and the redo branch', () => {
-  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor); const codec = new SvgCodec();
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands()); const codec = Defaults.codec();
   repl.execute('init'); repl.execute('create g scene'); repl.execute('create g nested in scene');
   repl.execute('create rect r 1 2 3 4 in nested'); repl.execute('move r 3 4'); repl.execute('undo');
   const before = codec.encode(editor.document);
@@ -119,7 +118,7 @@ test('exact required error messages preserve XML and the redo branch', () => {
 });
 
 test('overflow during a recursive edit is atomic, even after an earlier child has changed', () => {
-  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor); const codec = new SvgCodec();
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands()); const codec = Defaults.codec();
   repl.execute('init'); repl.execute('create g g');
   repl.execute('create rect first 1 2 3 4 in g'); repl.execute('create rect huge 1e308 2 3 4 in g');
   const before = codec.encode(editor.document);
@@ -129,7 +128,7 @@ test('overflow during a recursive edit is atomic, even after an earlier child ha
 });
 
 test('group across different parents uses nearest common ancestor and document order', () => {
-  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor);
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands());
   for (const command of ['init', 'create g outer', 'create g left in outer', 'create g right in outer',
     'create rect a 1 2 3 4 in left', 'create rect b 5 6 7 8 in right', 'group joined b a']) repl.execute(command);
   assert.equal(editor.document.find('joined').parent?.id, 'outer');
@@ -139,7 +138,7 @@ test('group across different parents uses nearest common ancestor and document o
 });
 
 test('tree [id], show parent and help expose the complete editing interface', () => {
-  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor);
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands());
   repl.execute('init'); repl.execute('create g g'); repl.execute('create circle c 1 2 3 red in g');
   const tree = repl.execute('tree g').lines.join('\n');
   assert.match(tree, /^g#g\n└── circle#c cx=1 cy=2 r=3 fill=red$/);
@@ -151,16 +150,16 @@ test('tree [id], show parent and help expose the complete editing interface', ()
 });
 
 test('successful save remembers path; failed read does not replace document or its path', () => {
-  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor);
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands());
   repl.execute('init'); assert.equal(repl.execute('save').lines[0], 'error: no file path. use save <file.svg>');
   repl.execute('save first.svg'); assert.equal(repl.execute('save').lines[0], 'saved to first.svg (0 elements)');
   repl.execute('init'); assert.equal(repl.execute('save').lines[0], 'error: no file path. use save <file.svg>');
-  const actual = new Repl(new Editor(new FileSvgStore()));
+  const actual = new Repl(new Editor(Defaults.store()), Defaults.commands());
   assert.equal(actual.execute('read __nonexistent_pj1.svg').lines[0], 'error: cannot read file: __nonexistent_pj1.svg');
 });
 
 test('command arities and invalid numeric input fail without modifying history or document', () => {
-  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor); const codec = new SvgCodec();
+  const editor = new Editor(new MemoryStore()); const repl = new Repl(editor, Defaults.commands()); const codec = Defaults.codec();
   repl.execute('init'); repl.execute('create rect r 1 2 3 4'); repl.execute('move r 1 1'); repl.execute('undo');
   const before = codec.encode(editor.document);
   for (const command of ['create rect x 1 2 3', 'create text t 1 2', 'create g x extra',

@@ -68,6 +68,11 @@ export abstract class Shape {
     return this.affine.isIdentity ? '' : ` transform="${this.affine.toSvg()}"`;
   }
 
+  get composite(): boolean { return false; }
+  validate(): void { this.children.forEach(child => child.validate()); }
+  fingerprint(): string {
+    return JSON.stringify([this.type, [...this.attributes()], this.content, this.children.map(child => child.fingerprint())]);
+  }
   abstract initialize(args: readonly string[]): void;
   abstract move(dx: number, dy: number): void;
   abstract scale(factor: number): void;

@@ -6,7 +6,7 @@ import type { SvgStore } from '../application/SvgStore.js';
 import { SvgCodec } from './SvgCodec.js';
 
 export class FileSvgStore implements SvgStore {
-  constructor(private readonly codec = new SvgCodec()) {}
+  constructor(private readonly codec: SvgCodec) {}
   read(path: string): { document: SvgDocument; warnings: readonly string[] } {
     let source: string;
     try { source = readFileSync(path, 'utf8'); }

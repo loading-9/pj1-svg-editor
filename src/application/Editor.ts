@@ -9,6 +9,8 @@ export class Editor {
   private readPath: string | undefined;
   private savedPath: string | undefined;
   private readonly history = new History();
+  private savedSnapshot: SvgDocument | undefined;
+  get saved(): SvgDocument | undefined { return this.savedSnapshot?.clone(); }
   constructor(private readonly store: SvgStore) {}
   get document(): SvgDocument {
     if (!this.current) throw new Error("no document. use 'init' or 'read' first");
@@ -17,6 +19,7 @@ export class Editor {
   init(width: number, height: number): string {
     const document = new SvgDocument(width, height);
     this.current = document;
+    this.savedSnapshot = document.clone();
     this.readPath = undefined;
     this.savedPath = undefined;
     this.history.afterIo();
@@ -24,6 +27,7 @@ export class Editor {
   }
   read(path: string): readonly string[] {
     const { document, warnings } = this.store.read(path);
+    this.savedSnapshot = document.clone();
     this.current = document; this.readPath = path; this.savedPath = undefined; this.history.afterIo();
     return [...warnings, `read ${path} (${document.count} elements)`];
   }
@@ -32,6 +36,7 @@ export class Editor {
     const target = path ?? this.readPath ?? this.savedPath;
     if (!target) throw new Error('no file path. use save <file.svg>');
     this.store.write(target, document);
+    this.savedSnapshot = document.clone();
     this.savedPath = target;
     this.history.afterIo();
     return `saved to ${target} (${document.count} elements)`;

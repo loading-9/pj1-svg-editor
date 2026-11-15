@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { Rect } from '../src/domain/Rect.js';
+import { Rect } from '../plugins/builtin-shapes/Rect.js';
 import { Group } from '../src/domain/Group.js';
 import { SvgDocument } from '../src/domain/SvgDocument.js';
 import { AffineTransform } from '../src/domain/AffineTransform.js';

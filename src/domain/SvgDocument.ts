@@ -56,7 +56,13 @@ export class SvgDocument {
   }
 
   add(shape: Shape, parent = this.root): void {
-    this.assertAvailable(shape.id);
+    const ids = new Set<string>();
+    const check = (node: Shape): void => {
+      this.assertAvailable(node.id);
+      if (ids.has(node.id)) throw new Error('id already exists: ' + node.id);
+      ids.add(node.id); node.children.forEach(check);
+    };
+    check(shape); shape.validate();
     parent.insert(shape);
   }
 
@@ -96,6 +102,7 @@ export class SvgDocument {
 
   ungroup(id: string): number {
     const group = this.container(id);
+    if (group.composite) throw new Error('cannot ungroup composite shape: ' + id);
     const parent = group.parent!;
     if (parent === this.root) throw new Error(`cannot ungroup top-level container: ${id}`);
     let index = parent.indexOf(group);
@@ -111,6 +118,15 @@ export class SvgDocument {
     parent.insert(shape, front ? parent.children.length : 0);
   }
 
+  validate(): void {
+    const ids = new Set<string>();
+    for (const shape of this.allShapes()) {
+      if (ids.has(shape.id)) throw new Error('id already exists: ' + shape.id);
+      ids.add(shape.id);
+    }
+    this.root.validate();
+  }
+  fingerprint(): string { return JSON.stringify([[...this.rootAttributes()], this.root.fingerprint()]); }
   clone(): SvgDocument {
     const copy = new SvgDocument(this.width, this.height);
     copy.canvasRoot = this.root.clone();

@@ -1,60 +1,13 @@
-import { Command } from './Command.js';
 import type { Editor } from './Editor.js';
-import { AddToCommand } from './commands/AddToCommand.js';
-import { CanvasCommand } from './commands/CanvasCommand.js';
-import { CreateCommand } from './commands/CreateCommand.js';
-import { DeleteCommand } from './commands/DeleteCommand.js';
-import { ExitCommand } from './commands/ExitCommand.js';
-import { GroupCommand } from './commands/GroupCommand.js';
-import { HelpCommand } from './commands/HelpCommand.js';
-import { InitCommand } from './commands/InitCommand.js';
-import { MoveCommand } from './commands/MoveCommand.js';
-import { ReadCommand } from './commands/ReadCommand.js';
-import { RedoCommand } from './commands/RedoCommand.js';
-import { SaveCommand } from './commands/SaveCommand.js';
-import { ScaleCommand } from './commands/ScaleCommand.js';
-import { SetCommand } from './commands/SetCommand.js';
-import { ShowCommand } from './commands/ShowCommand.js';
-import { TreeCommand } from './commands/TreeCommand.js';
-import { UndoCommand } from './commands/UndoCommand.js';
-import { UngroupCommand } from './commands/UngroupCommand.js';
-import { ZOrderCommand } from './commands/ZOrderCommand.js';
-
-/** Name dispatch location #1. Every execution gets its own Command/Memento. */
+import type { Extensions } from './Extensions.js';
 export class CommandRegistry {
-  private readonly factories = new Map<string, () => Command>([
-    ['init', () => new InitCommand()], ['read', () => new ReadCommand()],
-    ['save', () => new SaveCommand()], ['canvas', () => new CanvasCommand()],
-    ['create', () => new CreateCommand()], ['delete', () => new DeleteCommand()],
-    ['move', () => new MoveCommand()], ['scale', () => new ScaleCommand()],
-    ['set', () => new SetCommand()], ['group', () => new GroupCommand()],
-    ['ungroup', () => new UngroupCommand()], ['addto', () => new AddToCommand()],
-    ['front', () => new ZOrderCommand(true)], ['back', () => new ZOrderCommand(false)],
-    ['tree', () => new TreeCommand()], ['show', () => new ShowCommand()],
-    ['undo', () => new UndoCommand()], ['redo', () => new RedoCommand()],
-    ['help', () => new HelpCommand(this.help())],
-    ['exit', () => new ExitCommand()], ['quit', () => new ExitCommand()],
-  ]);
-  private help(): string[] {
-    return [
-      ...[...this.factories].filter(([name]) => name !== 'help' && name !== 'quit').map(([, create]) => create().syntax),
-      'help', 'quit (alias of exit; EOF also exits)',
-      'create rect <id> <x> <y> <w> <h> [fill] [in <containerId>]',
-      'create circle <id> <cx> <cy> <r> [fill] [in <containerId>]',
-      'create ellipse <id> <cx> <cy> <rx> <ry> [fill] [in <containerId>]',
-      'create line <id> <x1> <y1> <x2> <y2> [stroke] [in <containerId>]',
-      'create text <id> <x> <y> "content" [in <containerId>]',
-      'create g <id> [in <containerId>]',
-      'set: fill / stroke / stroke-width; geometry attributes; text content via text',
-      'Double-quote arguments containing spaces. Lines beginning with # are comments.',
-    ];
-  }
+  constructor(private readonly extensions: Extensions) {}
   run(editor: Editor, tokens: readonly string[]): { lines: readonly string[]; exit: boolean } {
     const name = tokens[0];
     if (name === undefined) return { lines: [], exit: false };
-    const create = this.factories.get(name);
-    if (!create) throw new Error(`unknown command: ${name}`);
-    const command = create();
+    const provider = this.extensions.commands.get(name);
+    if (!provider) throw new Error('unknown command: ' + name);
+    const command = provider.create();
     return { lines: command.run(editor, tokens.slice(1)), exit: command.exits };
   }
 }

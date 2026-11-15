@@ -1,7 +1,7 @@
+import { Defaults } from '../src/host/Defaults.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Editor } from '../src/application/Editor.js';
-import { CommandRegistry } from '../src/application/CommandRegistry.js';
 import { TreeRenderer } from '../src/application/TreeRenderer.js';
 import { MemoryStore } from './MemoryStore.js';
 
@@ -22,7 +22,7 @@ test('save without a path keeps the read source after an explicit save-as', () =
 });
 
 test('one command one history entry; branch invalidation and display transparency', () => {
-  const editor = new Editor(new MemoryStore()); const registry = new CommandRegistry();
+  const editor = new Editor(new MemoryStore()); const registry = Defaults.commands();
   const run = (...tokens: string[]) => registry.run(editor, tokens);
   run('init'); run('create', 'rect', 'r', '1', '2', '3', '4'); run('move', 'r', '10', '20');
   run('tree'); run('show', 'r'); run('help'); run('canvas');
@@ -34,7 +34,7 @@ test('one command one history entry; branch invalidation and display transparenc
 });
 
 test('all IO barriers clear history, and the next edit enables a fresh history', () => {
-  const editor = new Editor(new MemoryStore()); const registry = new CommandRegistry();
+  const editor = new Editor(new MemoryStore()); const registry = Defaults.commands();
   const run = (...tokens: string[]) => registry.run(editor, tokens);
   assert.throws(() => run('tree'), /no document/);
   run('help'); run('init'); assert.throws(() => run('undo'), /undo not allowed after io command/);
@@ -48,7 +48,7 @@ test('all IO barriers clear history, and the next edit enables a fresh history',
 });
 
 test('failed edits, IO, and validation preserve document and redo history', () => {
-  const store = new MemoryStore(); const editor = new Editor(store); const registry = new CommandRegistry();
+  const store = new MemoryStore(); const editor = new Editor(store); const registry = Defaults.commands();
   const run = (...tokens: string[]) => registry.run(editor, tokens);
   run('init'); run('create', 'rect', 'r', '1', '2', '3', '4'); run('move', 'r', '1', '1'); run('undo');
   const renderer = new TreeRenderer(); const before = renderer.tree(editor.document);
@@ -68,7 +68,7 @@ test('failed edits, IO, and validation preserve document and redo history', () =
 });
 
 test('group deletion and nested ungroup are single undo units', () => {
-  const editor = new Editor(new MemoryStore()); const registry = new CommandRegistry();
+  const editor = new Editor(new MemoryStore()); const registry = Defaults.commands();
   const run = (...tokens: string[]) => registry.run(editor, tokens);
   run('init'); run('create', 'g', 'scene');
   run('create', 'circle', 'c', '10', '20', '3', 'in', 'scene');

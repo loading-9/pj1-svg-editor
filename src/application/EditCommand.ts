@@ -13,6 +13,7 @@ export abstract class EditCommand extends Command {
   execute(document: SvgDocument, args: Arguments): { document: SvgDocument; message: string } {
     const working = document.clone();
     const message = this.apply(working, args);
+    working.validate();
     this.before = document.clone();
     this.after = working.clone();
     return { document: working, message };

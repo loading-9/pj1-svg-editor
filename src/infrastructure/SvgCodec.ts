@@ -8,7 +8,7 @@ import { ShapeFactory } from '../application/ShapeFactory.js';
 
 export class SvgCodec {
   private readonly namespace = 'http://www.w3.org/2000/svg';
-  constructor(private readonly factory = new ShapeFactory()) {}
+  constructor(private readonly factory: ShapeFactory) {}
 
   decode(source: string): { document: SvgDocument; warnings: string[] } {
     if (/<!DOCTYPE/i.test(source)) throw new Error('invalid SVG: DOCTYPE is not supported');
@@ -70,10 +70,12 @@ export class SvgCodec {
         this.assertNoText(element);
         elements.forEach(child => container.insert(readShape(child)));
       } else if (shape.content === undefined) this.assertNoText(element);
+      shape.validate();
       return shape;
     };
     this.assertNoText(root);
     for (const element of this.elements(root)) document.add(readShape(element));
+    document.validate();
     return { document, warnings };
   }
 
