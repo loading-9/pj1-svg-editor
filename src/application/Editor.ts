@@ -3,8 +3,9 @@ import type { Arguments } from './Arguments.js';
 import type { EditCommand } from './EditCommand.js';
 import { History } from './History.js';
 import type { SvgStore } from './SvgStore.js';
+import type { EditorContext } from './EditorContext.js';
 
-export class Editor {
+export class Editor implements EditorContext {
   private current: SvgDocument | undefined;
   private readPath: string | undefined;
   private savedPath: string | undefined;

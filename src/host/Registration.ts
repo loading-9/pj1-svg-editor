@@ -7,6 +7,7 @@ import type { TreeDecorator } from '../application/TreeDecorator.js';
 import type { AttributeHandler } from '../application/AttributeHandler.js';
 import type { Shape } from '../domain/Shape.js';
 import type { SvgDocument } from '../domain/SvgDocument.js';
+import { TreeRenderer } from '../application/TreeRenderer.js';
 export class Registration implements PluginContext {
   readonly staged = new Extensions();
   private sealed = false;
@@ -16,14 +17,19 @@ export class Registration implements PluginContext {
     if (!value.name || /\s/.test(value.name)) throw new Error('invalid registration name');
     if (this.live[category].has(value.name) || this.staged[category].has(value.name)) throw new Error('duplicate registration: ' + category + '/' + value.name);
   }
-  registerShape(value: ShapeProvider): void { this.add('shapes', value); this.staged.shapes.set(value.name,value); }
-  registerCommand(value: CommandProvider): void { this.add('commands',value); this.staged.commands.set(value.name,value); }
-  registerDecorator(value: TreeDecorator): void { this.add('decorators',value); this.staged.decorators.set(value.name,value); }
-  registerAttribute(value: AttributeHandler): void { this.add('attributes',value); this.staged.attributes.set(value.name,value); }
+  private methods(value: object, names: readonly string[]): void {
+    if(names.some(name => typeof (value as Record<string, unknown>)[name] !== 'function')) throw new Error('invalid extension contract');
+  }
+  registerShape(value: ShapeProvider): void { this.add('shapes', value); this.methods(value,['create','accepts','read']); if(!Number.isFinite(value.priority)||typeof value.syntax!=='string')throw new Error('invalid shape provider contract'); this.staged.shapes.set(value.name,value); }
+  registerCommand(value: CommandProvider): void { this.add('commands',value); this.methods(value,['create']); if(typeof value.syntax!=='string')throw new Error('invalid command contract'); this.staged.commands.set(value.name,value); }
+  registerDecorator(value: TreeDecorator): void { this.add('decorators',value); this.methods(value,['decorate']); this.staged.decorators.set(value.name,value); }
+  registerAttribute(value: AttributeHandler): void { this.add('attributes',value); this.methods(value,['handles','apply']); this.staged.attributes.set(value.name,value); }
   createShape(type: string, id: string, args: readonly string[]) { return new ShapeFactory(this.live).create(type,id,args); }
   help(): readonly string[] { return new HelpText(this.live).lines(); }
   setAttribute(document: SvgDocument, shape: Shape, attr: string, value: string): void { this.live.set(document, shape, attr, value); }
   treeDecorators(): readonly TreeDecorator[] { return [...this.live.decorators.values()]; }
+  renderTree(document:SvgDocument,id?:string,saved?:SvgDocument):readonly string[] {return new TreeRenderer(this.treeDecorators()).tree(document,id,saved);}
+  showShape(document:SvgDocument,id:string):readonly string[] {return new TreeRenderer().show(document,id);}
   close(): void { this.sealed = true; }
   publish(): void {
     for (const [name,p] of this.staged.shapes) this.live.shapes.set(name,p);

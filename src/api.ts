@@ -9,6 +9,7 @@ export { Command } from './application/Command.js';
 export { EditCommand } from './application/EditCommand.js';
 export { Arguments } from './application/Arguments.js';
 export { Editor } from './application/Editor.js';
+export type { EditorContext } from './application/EditorContext.js';
 export { TreeRenderer } from './application/TreeRenderer.js';
 export { ShapeFactory } from './application/ShapeFactory.js';
 export { Extensions } from './application/Extensions.js';

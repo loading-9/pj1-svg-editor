@@ -1,0 +1,75 @@
+[
+  {
+    "name": "box-code-A",
+    "commit": "2a02cc07aff6e045f5721e6af409b29403dc0b9e",
+    "checkedPathsExist": true,
+    "protectedPaths": [
+      "src/application",
+      "src/domain",
+      "src/infrastructure",
+      "src/host/PluginLoader.ts",
+      "plugins/builtin-commands",
+      "plugins/builtin-shapes",
+      "plugins/dir",
+      "plugins/stats"
+    ],
+    "protectedDiffEmpty": true,
+    "files": [
+      "plugins/box/Box.ts",
+      "plugins/box/BoxAttributes.ts",
+      "plugins/box/BoxPlugin.ts",
+      "plugins/box/BoxProvider.ts",
+      "plugins/box/BoxTypeLabel.ts",
+      "plugins/box/index.ts",
+      "plugins/box/package.json",
+      "src/host/codePlugins.ts",
+      "tests/box.test.ts"
+    ]
+  },
+  {
+    "name": "box-config-B",
+    "commit": "3a22dba7203a9a42b452926c5510d78ed5c98628",
+    "checkedPathsExist": true,
+    "protectedPaths": [
+      "src/application",
+      "src/domain",
+      "src/infrastructure",
+      "src/host/PluginLoader.ts",
+      "plugins/builtin-commands",
+      "plugins/builtin-shapes",
+      "plugins/dir",
+      "plugins/stats"
+    ],
+    "protectedDiffEmpty": true,
+    "files": [
+      "plugins.config.json"
+    ]
+  },
+  {
+    "name": "modified-star",
+    "commit": "2fc0d9fbe36452a935d5901a030595748194138e",
+    "checkedPathsExist": true,
+    "protectedPaths": [
+      "src/application",
+      "src/domain",
+      "src/infrastructure",
+      "src/host/PluginLoader.ts",
+      "plugins/box",
+      "plugins/builtin-commands",
+      "plugins/builtin-shapes",
+      "plugins/dir",
+      "plugins/stats"
+    ],
+    "protectedDiffEmpty": true,
+    "files": [
+      "plugins.config.json",
+      "plugins/tree-star/ModifiedStar.ts",
+      "plugins/tree-star/ModifiedStarPlugin.ts",
+      "plugins/tree-star/index.ts",
+      "plugins/tree-star/package.json",
+      "src/host/codePlugins.ts",
+      "tests/attributes.test.ts",
+      "tests/decorators.test.ts"
+    ]
+  }
+]

@@ -15,7 +15,10 @@ export class PluginLoader {
     try {
       if (!manifest || typeof manifest.name !== 'string' || !manifest.name || !plugin || typeof plugin.activate !== 'function') throw new Error('invalid plugin contract');
       const result: unknown = plugin.activate(transaction, options);
-      if (result !== undefined) throw new Error('activate must be synchronous and return void');
+      if (result !== undefined) {
+        if(result instanceof Promise) void result.catch(() => {});
+        throw new Error('activate must be synchronous and return void');
+      }
       transaction.close();
       const declared = manifest.contributes ?? {};
       if (!declared || typeof declared !== 'object' || Array.isArray(declared) || Object.keys(declared).some(k => !this.categories.includes(k as Category))) throw new Error('invalid contributes');

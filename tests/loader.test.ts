@@ -70,3 +70,14 @@ test('invalid config structure or syntax reports once and keeps built-ins', () =
     }
   } finally { rmSync(directory,{recursive:true,force:true}); }
 });
+test('partial transaction followed by duplicate rolls back, invalid methods reject, async rejection is contained',async()=>{
+ const e=new Extensions(),errors:string[]=[],loader=new PluginLoader(e,m=>errors.push(m));
+ loader.activate(new LabelPlugin(),{name:'good',contributes:{decorators:['label']}});
+ loader.activate({activate(ctx){ctx.registerDecorator({name:'new',decorate:()=>''});ctx.registerDecorator({name:'label',decorate:()=>''});}},{name:'partial-duplicate',contributes:{decorators:['new','label']}});
+ assert.deepEqual([...e.decorators.keys()],['label']);assert.equal(errors[0],'error: duplicate registration: decorators/label');
+ loader.activate({activate(ctx){ctx.registerDecorator({name:'invalid'} as never);}},{name:'bad-interface'});
+ assert.match(errors[1]!,/invalid extension contract/);
+ loader.activate({async activate(){throw Error('async boom');}} as never,{name:'async'});
+ await new Promise(resolve=>setImmediate(resolve));assert.match(errors[2]!,/activate must be synchronous/);
+ assert.deepEqual([...e.decorators.keys()],['label']);
+});

@@ -1,5 +1,5 @@
 import { Arguments, Command } from '../../src/api.js';
-import type { Editor } from '../../src/api.js';
+import type { EditorContext as Editor } from '../../src/api.js';
 import type { DirectoryReader } from './DirectoryReader.js';
 export class DirCommand extends Command {
   constructor(private readonly reader: DirectoryReader) { super(); }

@@ -6,7 +6,9 @@ export class TreeRenderer {
   constructor(private readonly decorators: readonly TreeDecorator[] = []) {}
   private suffix(shape: Shape | undefined, view: TreeView): string {
     const before = view.document.fingerprint();
-    const labels = this.decorators.map(d => d.decorate(shape, view)).filter(Boolean);
+    const values = this.decorators.map(d => d.decorate(shape, view));
+    if(values.some(value => typeof value !== 'string')) throw new Error('tree decorator must return a string');
+    const labels = values.filter(Boolean);
     if (before !== view.document.fingerprint()) throw new Error('tree decorator mutated document');
     if (labels.some(label => /[\r\n]/.test(label))) throw new Error('tree decorator returned multiline label');
     return labels.length ? ' ' + labels.join(' ') : '';

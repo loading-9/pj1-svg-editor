@@ -18,6 +18,8 @@ export interface PluginContext {
   help(): readonly string[];
   setAttribute(document: import('../domain/SvgDocument.js').SvgDocument, shape: import('../domain/Shape.js').Shape, attr: string, value: string): void;
   treeDecorators(): readonly TreeDecorator[];
+  renderTree(document: import('../domain/SvgDocument.js').SvgDocument, id?: string, saved?: import('../domain/SvgDocument.js').SvgDocument): readonly string[];
+  showShape(document: import('../domain/SvgDocument.js').SvgDocument, id: string): readonly string[];
 }
 export interface Plugin {
   activate(context: PluginContext, options?: unknown): void;

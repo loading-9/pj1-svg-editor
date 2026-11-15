@@ -1,5 +1,5 @@
 import { Arguments, Command } from '../../src/api.js';
-import type { Editor } from '../../src/api.js';
+import type { EditorContext as Editor } from '../../src/api.js';
 export class StatsCommand extends Command {
   override get syntax(): string { return 'stats'; }
   override run(editor: Editor, args: readonly string[]): readonly string[] {

@@ -1,10 +1,10 @@
 import type { SvgDocument } from '../../src/api.js';
 import type { Arguments } from '../../src/api.js';
 import { EditCommand } from '../../src/api.js';
-import { ShapeFactory } from '../../src/api.js';
+import type { PluginContext } from '../../src/api.js';
 
 export class CreateCommand extends EditCommand {
-  constructor(private readonly factory: Pick<ShapeFactory, 'create'>) { super(); }
+  constructor(private readonly factory: { create: PluginContext['createShape'] }) { super(); }
   override get syntax(): string { return 'create <type> <id> [params…] [in <containerId>]'; }
   protected override apply(document: SvgDocument, args: Arguments): string {
     args.count(2, Infinity);

@@ -29,8 +29,8 @@ export class BuiltinCommands implements Plugin {
     register('scale',()=>new ScaleCommand()); register('set',()=>new SetCommand(ctx));
     register('group',()=>new GroupCommand()); register('ungroup',()=>new UngroupCommand());
     register('addto',()=>new AddToCommand()); register('front',()=>new ZOrderCommand(true));
-    register('back',()=>new ZOrderCommand(false)); register('tree',()=>new TreeCommand(ctx.treeDecorators()));
-    register('show',()=>new ShowCommand()); register('undo',()=>new UndoCommand());
+    register('back',()=>new ZOrderCommand(false)); register('tree',()=>new TreeCommand(ctx));
+    register('show',()=>new ShowCommand(ctx)); register('undo',()=>new UndoCommand());
     register('redo',()=>new RedoCommand()); register('help',()=>new HelpCommand([...ctx.help()]));
     register('exit',()=>new ExitCommand()); register('quit',()=>new ExitCommand());
   }

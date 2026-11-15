@@ -1,0 +1,14 @@
+# Fixed cwd contents are created before either run. Logs live outside cwd.
+dir
+init
+create g scene
+create box n 10 20 100 60 "title" in scene
+stats
+dir
+set n label "updated"
+undo
+stats
+redo
+dir
+tree
+help

@@ -1,0 +1,60 @@
+[DIR]  docs
+[DIR]  plugins
+[FILE]  .hidden
+[FILE]  demo.svg
+[FILE]  package.json
+canvas 800x600 created
+g#scene created
+box#n created in g#scene
+rect: 1  text: 1  (total 2, containers 2)
+[DIR]  docs
+[DIR]  plugins
+[FILE]  .hidden
+[FILE]  demo.svg
+[FILE]  package.json
+box#n updated: label="updated"
+undone: set
+rect: 1  text: 1  (total 2, containers 2)
+redone: set
+[DIR]  docs
+[DIR]  plugins
+[FILE]  .hidden
+[FILE]  demo.svg
+[FILE]  package.json
+svg (800x600) *
+└── g#scene *
+    └── g#n data-kind=box (box) *
+        ├── rect#n-rect x=10 y=20 w=100 h=60 fill=#4a90d9 *
+        └── text#n-label (30,55) "updated" *
+init [w] [h]
+read <file.svg>
+save [file.svg]
+canvas [w] [h]
+create <type> <id> [params…] [in <containerId>]
+delete <id>
+move <id> <dx> <dy>
+scale <id> <factor>
+set <id> <attr> <value>
+group <newGid> <id1> <id2>…
+ungroup <gid>
+addto <gid> <id>
+front <id>
+back <id>
+tree [id]
+show <id>
+undo
+redo
+exit
+stats
+dir
+help
+quit (alias of exit; EOF also exits)
+create rect <id> <x> <y> <w> <h> [fill] [in <containerId>]
+create circle <id> <cx> <cy> <r> [fill] [in <containerId>]
+create ellipse <id> <cx> <cy> <rx> <ry> [fill] [in <containerId>]
+create line <id> <x1> <y1> <x2> <y2> [stroke] [in <containerId>]
+create text <id> <x> <y> "content" [in <containerId>]
+create g <id> [in <containerId>]
+create box <id> <x> <y> <w> <h> "<标题>" [in <containerId>]
+set: fill / stroke / stroke-width; geometry attributes; text content via text
+Double-quote arguments containing spaces. Lines beginning with # are comments.

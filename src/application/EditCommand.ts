@@ -1,13 +1,13 @@
 import { SvgDocument } from '../domain/SvgDocument.js';
 import { Arguments } from './Arguments.js';
 import { Command } from './Command.js';
-import type { Editor } from './Editor.js';
+import type { EditorContext } from './EditorContext.js';
 
 /** Command + Memento. The receiver is a detached document until execution succeeds. */
 export abstract class EditCommand extends Command {
   private before: SvgDocument | undefined;
   private after: SvgDocument | undefined;
-  override run(editor: Editor, values: readonly string[]): readonly string[] {
+  override run(editor: EditorContext, values: readonly string[]): readonly string[] {
     return [editor.edit(this, new Arguments(values, this.syntax))];
   }
   execute(document: SvgDocument, args: Arguments): { document: SvgDocument; message: string } {
