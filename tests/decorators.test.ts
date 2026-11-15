@@ -10,7 +10,7 @@ import { CommandRegistry } from '../src/application/CommandRegistry.js';
 import { BoxPlugin } from '../plugins/box/BoxPlugin.js';
 import { MemoryStore } from './MemoryStore.js';
 test('modified-star independent state machine: edit/save/edit/undo snapshot, new nodes, ancestors and instance isolation',()=>{
- let decorator:TreeDecorator|undefined;new ModifiedStarPlugin().activate({registerDecorator:(d:TreeDecorator)=>decorator=d} as PluginContext);
+ let decorator:TreeDecorator|undefined;new ModifiedStarPlugin().activate({registerDecorator:(d:TreeDecorator)=>{decorator=d;}} as PluginContext);
  const star=decorator!,document=new SvgDocument();document.add(new Group('parent'));document.add(new Group('child'),document.container('parent'));
  const saved=document.clone();const view:TreeView={document,saved};
  assert.equal(star.decorate(document.find('child'),view),'');document.find('child').setAttribute('fill','red');
