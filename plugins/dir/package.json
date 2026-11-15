@@ -1,0 +1,1 @@
+{"name":"@svgframe/plugin-dir","private":true,"main":"../../dist/plugins/dir/index.js","contributes":{"commands":["dir"]}}
