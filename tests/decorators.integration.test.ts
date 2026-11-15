@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {Editor,TreeRenderer} from '../src/api.js';
+import {ModifiedStarPlugin} from '../plugins/tree-star/ModifiedStarPlugin.js';
+import {Defaults} from '../src/host/Defaults.js';
+import {PluginLoader} from '../src/host/PluginLoader.js';
+import {CommandRegistry} from '../src/application/CommandRegistry.js';
+import {BoxPlugin} from '../plugins/box/BoxPlugin.js';
+import {MemoryStore} from './MemoryStore.js';
+test('two unaware decorators coexist in registration order; undo returns to actual save point',()=>{
+ const e=Defaults.extensions(),loader=new PluginLoader(e,m=>{throw Error(m);});
+ loader.activate(new BoxPlugin(),{name:'box',contributes:{shapes:['box'],attributes:['box-attributes'],decorators:['box-type-label']}});
+ loader.activate(new ModifiedStarPlugin(),{name:'star',contributes:{decorators:['modified-star']}});
+ const editor=new Editor(new MemoryStore()),commands=new CommandRegistry(e),run=(...args:string[])=>commands.run(editor,args).lines;
+ run('init');run('create','box','n','1','2','30','40','hi');assert.ok(run('tree')[1]!.endsWith('(box) *'));
+ run('save','memory.svg');assert.ok(run('tree')[1]!.endsWith('(box)'));assert.ok(run('tree').every(l=>!l.endsWith('*')));
+ run('set','n','label','new');assert.ok(run('tree')[1]!.endsWith('(box) *'));run('undo');assert.ok(run('tree').every(l=>!l.endsWith('*')));run('redo');assert.ok(run('tree')[1]!.endsWith('(box) *'));
+ run('save');run('set','n','fill','orange');run('undo');assert.ok(run('tree').every(l=>!l.endsWith('*')));
+ const baseline=new TreeRenderer().tree(editor.document);assert.ok(baseline.every(l=>!l.includes('(box)')&&!l.endsWith('*')));
+});
