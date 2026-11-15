@@ -2,6 +2,10 @@
 
 在仓库根目录运行 `npm ci`、`npm run build:extension`。用 VSCode 打开仓库根目录，选择调试配置 **SVG Mark and Outline** 并按 F5，启动 Extension Development Host。不需要发布到 Marketplace，也不修改全局扩展目录。
 
+如果使用已经构建的 `svg-mark-outline-0.2.0.vsix`，可以自行打开 VSCode 扩展面板的 `…` 菜单，选择 **Install from VSIX...**，选中该文件安装；然后打开本仓库的示例目录。此方式无需在本机编译源码。VSIX 只是安装包，构建成功不等于完成真实 GUI 验证。
+
+重建安装包：在根目录 `npm run build:extension`，随后进入 vscode-extension 目录，运行 `npm exec --yes --package=@vscode/vsce@3.6.2 -- vsce package --no-dependencies --skip-license --allow-missing-repository --no-rewrite-relative-links`。不传版本参数，不会创建 Git tag。安装包仅包含 bundle、示例及说明，完整 TypeScript 源码在仓库中。
+
 示例目录 `vscode-extension/examples/` 包括 `example.svg`、`notes.txt` 和名字以 `.svg` 结尾的目录 `folder.svg`。只有 SVG 文件应出现 `[]`。
 
 ## 人工验证与截图

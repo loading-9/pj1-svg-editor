@@ -1,0 +1,16 @@
+{
+  "checkedOn": "2026-11-15",
+  "source": "GitHub REST workflow run and jobs endpoints",
+  "commit": "0fb383255390b5bc79740232fc8ef3f9f53d9e3a",
+  "runId": 43701276644,
+  "url": "https://github.com/loading-9/pj1-svg-editor/actions/runs/43701276644",
+  "status": "completed",
+  "conclusion": "success",
+  "scope": "Existing workflow runs npm ci and npm run check; local extension bundle, independent import audit, Git-boundary and dual-assembly checks have separate logs.",
+  "jobs": [
+    {"name":"test (windows-latest, 20)","conclusion":"success"},
+    {"name":"test (windows-latest, 22)","conclusion":"success"},
+    {"name":"test (ubuntu-latest, 20)","conclusion":"success"},
+    {"name":"test (ubuntu-latest, 22)","conclusion":"success"}
+  ]
+}

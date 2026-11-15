@@ -176,6 +176,8 @@ npm run verify:git
 
 [Git 差异证据](verification/git-boundaries.json) 由脚本验证：先确认保护路径实际存在，再检查接入提交的内核、加载器和既有插件差异为空。它检查具体历史提交，不以当前目录的空 diff 冒充插件接入证据。
 
+远程既有 CI 在代码/测试版本 `0fb3832` 的 Ubuntu/Windows × Node 20/22 四组合均成功，[运行记录](https://github.com/loading-9/pj1-svg-editor/actions/runs/43701276644) 与 [校验结果](verification/ci.json) 可复核。该工作流执行 npm ci/check；其他独立性、打包、双装配与 Git 边界验证由本地报告分别记录，不混称为 CI 检查项。当前推送认证未授予 workflow scope，因而保留原有工作流，未要求额外权限。
+
 ### 指标与可复现材料
 
 [docs/metrics](../docs/metrics/README.md) 提供当前代码与 final 的文件清单、职责、物理行数和聚合圈复杂度；[首次框架指标](../docs/metrics/framework/README.md) 保留首轮产出。脚本从 Git 对象生成，CLI 按内核/装配处/插件拆分，VSCode 单列，不计依赖、构建产物、测试和脚本。对最终 p2 可再运行：
