@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [{
+    "name": "SVG Mark and Outline",
+    "type": "extensionHost",
+    "request": "launch",
+    "args": ["--extensionDevelopmentPath=${workspaceFolder}/vscode-extension", "${workspaceFolder}/vscode-extension/examples"],
+    "preLaunchTask": "build-svg-extension",
+    "outFiles": ["${workspaceFolder}/vscode-extension/dist/**/*.js"]
+  }]
+}

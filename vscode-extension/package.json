@@ -1,0 +1,14 @@
+{
+  "name": "svg-mark-outline",
+  "displayName": "SVG Mark and Outline",
+  "description": "SVG file badges and native document outline",
+  "version": "0.2.0",
+  "publisher": "svgframe",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "scripts": { "build": "node ../scripts/build-extension.mjs" },
+  "capabilities": { "untrustedWorkspaces": { "supported": true } },
+  "contributes": {}
+}
