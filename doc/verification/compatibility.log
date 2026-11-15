@@ -1,0 +1,1 @@
+{"baseline":"final","phase1Bytes":1966,"phase1ByteIdentical":true,"baselineCompiledFromGit":true,"dualAssembly":[{"name":"cli-1","bytes":2029,"byteIdentical":true},{"name":"box","bytes":1750,"byteIdentical":true},{"name":"plugins","bytes":1549,"byteIdentical":true}],"fixedDirectoryLogsOutsideCwd":true}

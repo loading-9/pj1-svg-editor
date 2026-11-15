@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-15",
+  "node": "v24.22.1",
+  "typescript": "5.9.3",
+  "results": [
+    {
+      "name": "build",
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.json",
+      "exitCode": 0,
+      "tests": 0
+    },
+    {
+      "name": "architecture",
+      "command": "node scripts/check-architecture.mjs",
+      "exitCode": 0,
+      "tests": 0
+    },
+    {
+      "name": "tests",
+      "command": "node scripts/test.mjs",
+      "exitCode": 0,
+      "tests": 63
+    },
+    {
+      "name": "plugin-imports",
+      "command": "node scripts/check-plugin-tests.mjs",
+      "exitCode": 0,
+      "tests": 0
+    },
+    {
+      "name": "plugin-tests",
+      "command": "node scripts/test.mjs --plugins-only",
+      "exitCode": 0,
+      "tests": 7
+    },
+    {
+      "name": "extension-build",
+      "command": "node scripts/build-extension.mjs",
+      "exitCode": 0,
+      "tests": 0
+    },
+    {
+      "name": "compatibility",
+      "command": "node scripts/verify-compatibility.mjs",
+      "exitCode": 0,
+      "tests": 0
+    },
+    {
+      "name": "git-boundaries",
+      "command": "node scripts/verify-git-boundaries.mjs",
+      "exitCode": 0,
+      "tests": 0
+    }
+  ],
+  "manualVSCodeEvidence": "pending",
+  "p2Tag": "not yet created"
+}

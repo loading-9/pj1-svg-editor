@@ -1,0 +1,1189 @@
+{
+  "baseline": "final",
+  "target": "phase2-code",
+  "method": "Physical TS lines including comments/blanks. Complexity=sum(function baselines + if/loops/catch/ternary/case/&&/||/?? decisions). CLI adapters and host count as assembly. Dependencies, output, tests and scripts excluded. VSCode separate.",
+  "summary": [
+    {
+      "category": "kernel",
+      "linesBefore": 976,
+      "linesAfter": 793,
+      "complexityBefore": 323,
+      "complexityAfter": 262
+    },
+    {
+      "category": "assembly",
+      "linesBefore": 210,
+      "linesAfter": 375,
+      "complexityBefore": 92,
+      "complexityAfter": 194
+    },
+    {
+      "category": "plugins",
+      "linesBefore": 0,
+      "linesAfter": 526,
+      "complexityBefore": 0,
+      "complexityAfter": 188
+    },
+    {
+      "category": "cli",
+      "linesBefore": 1186,
+      "linesAfter": 1694,
+      "complexityBefore": 415,
+      "complexityAfter": 644
+    },
+    {
+      "category": "vscode",
+      "linesBefore": 0,
+      "linesAfter": 68,
+      "complexityBefore": 0,
+      "complexityAfter": 24
+    }
+  ],
+  "before": [
+    {
+      "file": "src/application/Arguments.ts",
+      "category": "kernel",
+      "responsibility": "命令参数及数量验证",
+      "lines": 16,
+      "complexity": 9,
+      "functions": 6,
+      "decisions": 3
+    },
+    {
+      "file": "src/application/Command.ts",
+      "category": "kernel",
+      "responsibility": "命令抽象及运行协议",
+      "lines": 7,
+      "complexity": 1,
+      "functions": 1,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/CommandRegistry.ts",
+      "category": "kernel",
+      "responsibility": "按注册名分发命令",
+      "lines": 60,
+      "complexity": 28,
+      "functions": 25,
+      "decisions": 3
+    },
+    {
+      "file": "src/application/EditCommand.ts",
+      "category": "kernel",
+      "responsibility": "编辑副本与 before/after Memento",
+      "lines": 29,
+      "complexity": 6,
+      "functions": 4,
+      "decisions": 2
+    },
+    {
+      "file": "src/application/Editor.ts",
+      "category": "kernel",
+      "responsibility": "会话、路径、保存快照及历史协调",
+      "lines": 59,
+      "complexity": 15,
+      "functions": 9,
+      "decisions": 6
+    },
+    {
+      "file": "src/application/History.ts",
+      "category": "kernel",
+      "responsibility": "撤销重做栈与 IO 屏障",
+      "lines": 41,
+      "complexity": 8,
+      "functions": 5,
+      "decisions": 3
+    },
+    {
+      "file": "src/application/ShapeFactory.ts",
+      "category": "kernel",
+      "responsibility": "调用图形提供器创建与读回",
+      "lines": 34,
+      "complexity": 5,
+      "functions": 3,
+      "decisions": 2
+    },
+    {
+      "file": "src/application/SvgStore.ts",
+      "category": "kernel",
+      "responsibility": "持久化端口",
+      "lines": 6,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/TreeRenderer.ts",
+      "category": "kernel",
+      "responsibility": "不识别插件名的结构渲染",
+      "lines": 34,
+      "complexity": 11,
+      "functions": 4,
+      "decisions": 7
+    },
+    {
+      "file": "src/application/commands/AddToCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：AddTo",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/CanvasCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Canvas",
+      "lines": 13,
+      "complexity": 3,
+      "functions": 2,
+      "decisions": 1
+    },
+    {
+      "file": "src/application/commands/CreateCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Create",
+      "lines": 19,
+      "complexity": 7,
+      "functions": 3,
+      "decisions": 4
+    },
+    {
+      "file": "src/application/commands/DeleteCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Delete",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/ExitCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Exit",
+      "lines": 11,
+      "complexity": 3,
+      "functions": 3,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/GroupCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Group",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/HelpCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Help",
+      "lines": 11,
+      "complexity": 3,
+      "functions": 3,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/InitCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Init",
+      "lines": 11,
+      "complexity": 4,
+      "functions": 2,
+      "decisions": 2
+    },
+    {
+      "file": "src/application/commands/MoveCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Move",
+      "lines": 13,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/ReadCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Read",
+      "lines": 11,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/RedoCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Redo",
+      "lines": 10,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/SaveCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Save",
+      "lines": 11,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/ScaleCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Scale",
+      "lines": 14,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/SetCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Set",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/ShowCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Show",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/TreeCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Tree",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/UndoCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Undo",
+      "lines": 10,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/UngroupCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：Ungroup",
+      "lines": 11,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/commands/ZOrderCommand.ts",
+      "category": "kernel",
+      "responsibility": "命令对象：ZOrder",
+      "lines": 13,
+      "complexity": 5,
+      "functions": 3,
+      "decisions": 2
+    },
+    {
+      "file": "src/cli/Repl.ts",
+      "category": "assembly",
+      "responsibility": "逐行终端交互与错误边界",
+      "lines": 35,
+      "complexity": 10,
+      "functions": 4,
+      "decisions": 6
+    },
+    {
+      "file": "src/cli/Tokenizer.ts",
+      "category": "assembly",
+      "responsibility": "终端参数与注释分词",
+      "lines": 19,
+      "complexity": 13,
+      "functions": 1,
+      "decisions": 12
+    },
+    {
+      "file": "src/cli/main.ts",
+      "category": "assembly",
+      "responsibility": "CLI 组合入口",
+      "lines": 11,
+      "complexity": 3,
+      "functions": 1,
+      "decisions": 2
+    },
+    {
+      "file": "src/domain/AffineTransform.ts",
+      "category": "kernel",
+      "responsibility": "仿射矩阵值对象",
+      "lines": 53,
+      "complexity": 17,
+      "functions": 10,
+      "decisions": 7
+    },
+    {
+      "file": "src/domain/Circle.ts",
+      "category": "kernel",
+      "responsibility": "图形领域实现：Circle",
+      "lines": 8,
+      "complexity": 4,
+      "functions": 4,
+      "decisions": 0
+    },
+    {
+      "file": "src/domain/Ellipse.ts",
+      "category": "kernel",
+      "responsibility": "图形领域实现：Ellipse",
+      "lines": 8,
+      "complexity": 4,
+      "functions": 4,
+      "decisions": 0
+    },
+    {
+      "file": "src/domain/GeometryShape.ts",
+      "category": "kernel",
+      "responsibility": "几何字段、验证与多态变换",
+      "lines": 73,
+      "complexity": 32,
+      "functions": 20,
+      "decisions": 12
+    },
+    {
+      "file": "src/domain/Group.ts",
+      "category": "kernel",
+      "responsibility": "Composite 子树及父子关系",
+      "lines": 53,
+      "complexity": 22,
+      "functions": 15,
+      "decisions": 7
+    },
+    {
+      "file": "src/domain/Line.ts",
+      "category": "kernel",
+      "responsibility": "图形领域实现：Line",
+      "lines": 8,
+      "complexity": 4,
+      "functions": 4,
+      "decisions": 0
+    },
+    {
+      "file": "src/domain/Numbers.ts",
+      "category": "kernel",
+      "responsibility": "有限数及尺寸验证",
+      "lines": 29,
+      "complexity": 10,
+      "functions": 5,
+      "decisions": 5
+    },
+    {
+      "file": "src/domain/Rect.ts",
+      "category": "kernel",
+      "responsibility": "图形领域实现：Rect",
+      "lines": 8,
+      "complexity": 4,
+      "functions": 4,
+      "decisions": 0
+    },
+    {
+      "file": "src/domain/Shape.ts",
+      "category": "kernel",
+      "responsibility": "图形公共抽象、样式封装及克隆协议",
+      "lines": 76,
+      "complexity": 32,
+      "functions": 19,
+      "decisions": 13
+    },
+    {
+      "file": "src/domain/SvgDocument.ts",
+      "category": "kernel",
+      "responsibility": "画布、查找、分组、顺序及全局不变量",
+      "lines": 120,
+      "complexity": 51,
+      "functions": 31,
+      "decisions": 20
+    },
+    {
+      "file": "src/domain/Text.ts",
+      "category": "kernel",
+      "responsibility": "图形领域实现：Text",
+      "lines": 24,
+      "complexity": 9,
+      "functions": 7,
+      "decisions": 2
+    },
+    {
+      "file": "src/infrastructure/FileSvgStore.ts",
+      "category": "assembly",
+      "responsibility": "UTF-8 文件存储与临时替换",
+      "lines": 26,
+      "complexity": 6,
+      "functions": 3,
+      "decisions": 3
+    },
+    {
+      "file": "src/infrastructure/SvgCodec.ts",
+      "category": "assembly",
+      "responsibility": "SVG/XML 编解码与提供器适配",
+      "lines": 119,
+      "complexity": 60,
+      "functions": 20,
+      "decisions": 40
+    }
+  ],
+  "after": [
+    {
+      "file": "plugins/box/Box.ts",
+      "category": "plugins",
+      "responsibility": "复合框体与必要部件不变量",
+      "lines": 25,
+      "complexity": 17,
+      "functions": 12,
+      "decisions": 5
+    },
+    {
+      "file": "plugins/box/BoxAttributes.ts",
+      "category": "plugins",
+      "responsibility": "fill/label 的领域传播",
+      "lines": 12,
+      "complexity": 7,
+      "functions": 2,
+      "decisions": 5
+    },
+    {
+      "file": "plugins/box/BoxPlugin.ts",
+      "category": "plugins",
+      "responsibility": "注册 box 的三个扩展实现",
+      "lines": 14,
+      "complexity": 6,
+      "functions": 1,
+      "decisions": 5
+    },
+    {
+      "file": "plugins/box/BoxProvider.ts",
+      "category": "plugins",
+      "responsibility": "box 创建及带标记 g 的读回",
+      "lines": 19,
+      "complexity": 7,
+      "functions": 5,
+      "decisions": 2
+    },
+    {
+      "file": "plugins/box/BoxTypeLabel.ts",
+      "category": "plugins",
+      "responsibility": "box 类型行尾标签",
+      "lines": 6,
+      "complexity": 2,
+      "functions": 1,
+      "decisions": 1
+    },
+    {
+      "file": "plugins/box/index.ts",
+      "category": "plugins",
+      "responsibility": "导出插件默认实例",
+      "lines": 2,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/AddToCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：AddTo",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/BuiltinCommands.ts",
+      "category": "plugins",
+      "responsibility": "内置命令的插件装配",
+      "lines": 37,
+      "complexity": 24,
+      "functions": 24,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/CanvasCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Canvas",
+      "lines": 13,
+      "complexity": 3,
+      "functions": 2,
+      "decisions": 1
+    },
+    {
+      "file": "plugins/builtin-commands/CreateCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Create",
+      "lines": 19,
+      "complexity": 7,
+      "functions": 3,
+      "decisions": 4
+    },
+    {
+      "file": "plugins/builtin-commands/DeleteCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Delete",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/ExitCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Exit",
+      "lines": 11,
+      "complexity": 3,
+      "functions": 3,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/GroupCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Group",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/HelpCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Help",
+      "lines": 11,
+      "complexity": 3,
+      "functions": 3,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/InitCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Init",
+      "lines": 11,
+      "complexity": 4,
+      "functions": 2,
+      "decisions": 2
+    },
+    {
+      "file": "plugins/builtin-commands/MoveCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Move",
+      "lines": 13,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/ReadCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Read",
+      "lines": 11,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/RedoCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Redo",
+      "lines": 10,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/SaveCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Save",
+      "lines": 11,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/ScaleCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Scale",
+      "lines": 14,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/SetCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Set",
+      "lines": 14,
+      "complexity": 3,
+      "functions": 3,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/ShowCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Show",
+      "lines": 13,
+      "complexity": 3,
+      "functions": 3,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/TreeCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Tree",
+      "lines": 13,
+      "complexity": 3,
+      "functions": 3,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/UndoCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Undo",
+      "lines": 10,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/UngroupCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Ungroup",
+      "lines": 11,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-commands/ZOrderCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：ZOrder",
+      "lines": 13,
+      "complexity": 5,
+      "functions": 3,
+      "decisions": 2
+    },
+    {
+      "file": "plugins/builtin-shapes/BuiltinShapeProvider.ts",
+      "category": "plugins",
+      "responsibility": "旧图形类的提供器适配",
+      "lines": 12,
+      "complexity": 5,
+      "functions": 4,
+      "decisions": 1
+    },
+    {
+      "file": "plugins/builtin-shapes/BuiltinShapes.ts",
+      "category": "plugins",
+      "responsibility": "内置六种图形的插件装配",
+      "lines": 19,
+      "complexity": 1,
+      "functions": 1,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-shapes/Circle.ts",
+      "category": "plugins",
+      "responsibility": "图形领域实现：Circle",
+      "lines": 8,
+      "complexity": 4,
+      "functions": 4,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-shapes/Ellipse.ts",
+      "category": "plugins",
+      "responsibility": "图形领域实现：Ellipse",
+      "lines": 8,
+      "complexity": 4,
+      "functions": 4,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-shapes/Line.ts",
+      "category": "plugins",
+      "responsibility": "图形领域实现：Line",
+      "lines": 8,
+      "complexity": 4,
+      "functions": 4,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-shapes/Rect.ts",
+      "category": "plugins",
+      "responsibility": "图形领域实现：Rect",
+      "lines": 8,
+      "complexity": 4,
+      "functions": 4,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/builtin-shapes/Text.ts",
+      "category": "plugins",
+      "responsibility": "图形领域实现：Text",
+      "lines": 24,
+      "complexity": 9,
+      "functions": 7,
+      "decisions": 2
+    },
+    {
+      "file": "plugins/builtin-shapes/index.ts",
+      "category": "plugins",
+      "responsibility": "导出插件默认实例",
+      "lines": 2,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/dir/DirCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Dir",
+      "lines": 16,
+      "complexity": 10,
+      "functions": 5,
+      "decisions": 5
+    },
+    {
+      "file": "plugins/dir/DirPlugin.ts",
+      "category": "plugins",
+      "responsibility": "注入目录端口并注册 dir",
+      "lines": 8,
+      "complexity": 3,
+      "functions": 3,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/dir/DirectoryReader.ts",
+      "category": "plugins",
+      "responsibility": "目录访问端口与项类型",
+      "lines": 5,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/dir/NodeDirectoryReader.ts",
+      "category": "plugins",
+      "responsibility": "Node 文件系统到目录端口的适配",
+      "lines": 9,
+      "complexity": 6,
+      "functions": 3,
+      "decisions": 3
+    },
+    {
+      "file": "plugins/dir/index.ts",
+      "category": "plugins",
+      "responsibility": "导出插件默认实例",
+      "lines": 2,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/stats/StatsCommand.ts",
+      "category": "plugins",
+      "responsibility": "命令对象：Stats",
+      "lines": 15,
+      "complexity": 6,
+      "functions": 3,
+      "decisions": 3
+    },
+    {
+      "file": "plugins/stats/StatsPlugin.ts",
+      "category": "plugins",
+      "responsibility": "注册 stats 命令",
+      "lines": 5,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/stats/index.ts",
+      "category": "plugins",
+      "responsibility": "导出插件默认实例",
+      "lines": 2,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/tree-star/ModifiedStar.ts",
+      "category": "plugins",
+      "responsibility": "实例内 dirty 缓存与保存内容比较",
+      "lines": 19,
+      "complexity": 12,
+      "functions": 4,
+      "decisions": 8
+    },
+    {
+      "file": "plugins/tree-star/ModifiedStarPlugin.ts",
+      "category": "plugins",
+      "responsibility": "注册 dirty 标签",
+      "lines": 5,
+      "complexity": 1,
+      "functions": 1,
+      "decisions": 0
+    },
+    {
+      "file": "plugins/tree-star/index.ts",
+      "category": "plugins",
+      "responsibility": "导出插件默认实例",
+      "lines": 2,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/api.ts",
+      "category": "kernel",
+      "responsibility": "插件公共 API 门面",
+      "lines": 20,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/Arguments.ts",
+      "category": "kernel",
+      "responsibility": "命令参数及数量验证",
+      "lines": 16,
+      "complexity": 9,
+      "functions": 6,
+      "decisions": 3
+    },
+    {
+      "file": "src/application/AttributeHandler.ts",
+      "category": "kernel",
+      "responsibility": "属性语义扩展契约",
+      "lines": 8,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/Command.ts",
+      "category": "kernel",
+      "responsibility": "命令抽象及运行协议",
+      "lines": 7,
+      "complexity": 1,
+      "functions": 1,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/CommandRegistry.ts",
+      "category": "kernel",
+      "responsibility": "按注册名分发命令",
+      "lines": 13,
+      "complexity": 4,
+      "functions": 2,
+      "decisions": 2
+    },
+    {
+      "file": "src/application/EditCommand.ts",
+      "category": "kernel",
+      "responsibility": "编辑副本与 before/after Memento",
+      "lines": 30,
+      "complexity": 6,
+      "functions": 4,
+      "decisions": 2
+    },
+    {
+      "file": "src/application/Editor.ts",
+      "category": "kernel",
+      "responsibility": "会话、路径、保存快照及历史协调",
+      "lines": 65,
+      "complexity": 16,
+      "functions": 10,
+      "decisions": 6
+    },
+    {
+      "file": "src/application/EditorContext.ts",
+      "category": "kernel",
+      "responsibility": "命令消费的公开用例端口",
+      "lines": 15,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/Extensions.ts",
+      "category": "kernel",
+      "responsibility": "扩展注册表与属性策略选择",
+      "lines": 21,
+      "complexity": 6,
+      "functions": 3,
+      "decisions": 3
+    },
+    {
+      "file": "src/application/HelpText.ts",
+      "category": "kernel",
+      "responsibility": "汇总已注册命令和图形语法",
+      "lines": 13,
+      "complexity": 6,
+      "functions": 5,
+      "decisions": 1
+    },
+    {
+      "file": "src/application/History.ts",
+      "category": "kernel",
+      "responsibility": "撤销重做栈与 IO 屏障",
+      "lines": 41,
+      "complexity": 8,
+      "functions": 5,
+      "decisions": 3
+    },
+    {
+      "file": "src/application/Plugin.ts",
+      "category": "kernel",
+      "responsibility": "插件、注册上下文与清单类型",
+      "lines": 26,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/ShapeFactory.ts",
+      "category": "kernel",
+      "responsibility": "调用图形提供器创建与读回",
+      "lines": 21,
+      "complexity": 10,
+      "functions": 5,
+      "decisions": 5
+    },
+    {
+      "file": "src/application/ShapeProvider.ts",
+      "category": "kernel",
+      "responsibility": "图形扩展契约",
+      "lines": 9,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/SvgStore.ts",
+      "category": "kernel",
+      "responsibility": "持久化端口",
+      "lines": 6,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/TreeDecorator.ts",
+      "category": "kernel",
+      "responsibility": "标签与保存比较视图契约",
+      "lines": 10,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/application/TreeRenderer.ts",
+      "category": "kernel",
+      "responsibility": "不识别插件名的结构渲染",
+      "lines": 47,
+      "complexity": 20,
+      "functions": 9,
+      "decisions": 11
+    },
+    {
+      "file": "src/cli/Repl.ts",
+      "category": "assembly",
+      "responsibility": "逐行终端交互与错误边界",
+      "lines": 34,
+      "complexity": 10,
+      "functions": 4,
+      "decisions": 6
+    },
+    {
+      "file": "src/cli/Tokenizer.ts",
+      "category": "assembly",
+      "responsibility": "终端参数与注释分词",
+      "lines": 19,
+      "complexity": 13,
+      "functions": 1,
+      "decisions": 12
+    },
+    {
+      "file": "src/cli/main.ts",
+      "category": "assembly",
+      "responsibility": "CLI 组合入口",
+      "lines": 22,
+      "complexity": 10,
+      "functions": 3,
+      "decisions": 7
+    },
+    {
+      "file": "src/domain/AffineTransform.ts",
+      "category": "kernel",
+      "responsibility": "仿射矩阵值对象",
+      "lines": 53,
+      "complexity": 17,
+      "functions": 10,
+      "decisions": 7
+    },
+    {
+      "file": "src/domain/GeometryShape.ts",
+      "category": "kernel",
+      "responsibility": "几何字段、验证与多态变换",
+      "lines": 73,
+      "complexity": 32,
+      "functions": 20,
+      "decisions": 12
+    },
+    {
+      "file": "src/domain/Group.ts",
+      "category": "kernel",
+      "responsibility": "Composite 子树及父子关系",
+      "lines": 53,
+      "complexity": 22,
+      "functions": 15,
+      "decisions": 7
+    },
+    {
+      "file": "src/domain/Numbers.ts",
+      "category": "kernel",
+      "responsibility": "有限数及尺寸验证",
+      "lines": 29,
+      "complexity": 10,
+      "functions": 5,
+      "decisions": 5
+    },
+    {
+      "file": "src/domain/Shape.ts",
+      "category": "kernel",
+      "responsibility": "图形公共抽象、样式封装及克隆协议",
+      "lines": 81,
+      "complexity": 37,
+      "functions": 24,
+      "decisions": 13
+    },
+    {
+      "file": "src/domain/SvgDocument.ts",
+      "category": "kernel",
+      "responsibility": "画布、查找、分组、顺序及全局不变量",
+      "lines": 136,
+      "complexity": 58,
+      "functions": 34,
+      "decisions": 24
+    },
+    {
+      "file": "src/host/Defaults.ts",
+      "category": "assembly",
+      "responsibility": "默认内置能力装配",
+      "lines": 22,
+      "complexity": 5,
+      "functions": 5,
+      "decisions": 0
+    },
+    {
+      "file": "src/host/PluginLoader.ts",
+      "category": "assembly",
+      "responsibility": "通用模块加载、配置和清单校验",
+      "lines": 76,
+      "complexity": 61,
+      "functions": 11,
+      "decisions": 50
+    },
+    {
+      "file": "src/host/Registration.ts",
+      "category": "assembly",
+      "responsibility": "注册暂存、接口检查与原子发布",
+      "lines": 40,
+      "complexity": 29,
+      "functions": 16,
+      "decisions": 13
+    },
+    {
+      "file": "src/host/codePlugins.ts",
+      "category": "assembly",
+      "responsibility": "可选插件代码装配表",
+      "lines": 15,
+      "complexity": 0,
+      "functions": 0,
+      "decisions": 0
+    },
+    {
+      "file": "src/infrastructure/FileSvgStore.ts",
+      "category": "assembly",
+      "responsibility": "UTF-8 文件存储与临时替换",
+      "lines": 26,
+      "complexity": 6,
+      "functions": 3,
+      "decisions": 3
+    },
+    {
+      "file": "src/infrastructure/SvgCodec.ts",
+      "category": "assembly",
+      "responsibility": "SVG/XML 编解码与提供器适配",
+      "lines": 121,
+      "complexity": 60,
+      "functions": 20,
+      "decisions": 40
+    },
+    {
+      "file": "vscode-extension/src/OutlineNode.ts",
+      "category": "vscode",
+      "responsibility": "大纲位置树节点",
+      "lines": 5,
+      "complexity": 1,
+      "functions": 1,
+      "decisions": 0
+    },
+    {
+      "file": "vscode-extension/src/OutlineParser.ts",
+      "category": "vscode",
+      "responsibility": "含源码位置的 XML 解析",
+      "lines": 20,
+      "complexity": 10,
+      "functions": 4,
+      "decisions": 6
+    },
+    {
+      "file": "vscode-extension/src/SvgDocumentSymbolProvider.ts",
+      "category": "vscode",
+      "responsibility": "位置树到原生大纲符号适配",
+      "lines": 16,
+      "complexity": 4,
+      "functions": 3,
+      "decisions": 1
+    },
+    {
+      "file": "vscode-extension/src/SvgExtension.ts",
+      "category": "vscode",
+      "responsibility": "VSCode 两种提供器的注册",
+      "lines": 12,
+      "complexity": 2,
+      "functions": 2,
+      "decisions": 0
+    },
+    {
+      "file": "vscode-extension/src/SvgFileDecorationProvider.ts",
+      "category": "vscode",
+      "responsibility": "只读 SVG 文件装饰适配",
+      "lines": 12,
+      "complexity": 6,
+      "functions": 2,
+      "decisions": 4
+    },
+    {
+      "file": "vscode-extension/src/extension.ts",
+      "category": "vscode",
+      "responsibility": "VSCode 生命周期入口",
+      "lines": 3,
+      "complexity": 1,
+      "functions": 1,
+      "decisions": 0
+    }
+  ]
+}

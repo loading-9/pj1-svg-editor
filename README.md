@@ -1,34 +1,39 @@
-# PJ1 Phase 1 — CLI SVG 编辑器
+# PJ1 — SVG 编辑器与插件实践
 
-TypeScript 面向对象实现；六种内置 SVG 图形、嵌套分组、文件读写与命令级撤销重做。
+TypeScript 面向对象 SVG CLI；Phase 2 提供图形、命令、树标签、属性语义扩展，以及独立的 VSCode SVG 标记和原生大纲扩展。
 
 ```sh
 npm ci
-npm run cli
+npm run build
+node dist/src/cli/main.js
+node dist/src/cli/main.js --code
+node dist/src/cli/main.js --config plugins.config.json
 ```
 
-需要 Node.js 20 或更新版本。提示符为 `svg>`，输入 `help` 查看命令，`exit`/`quit` 或 EOF 退出。参数含空格时使用双引号；仅以 `#` 开头的整行作为注释，十六进制颜色可以直接输入。
+无参数入口提供原有六种图形与命令。`--code` 和 `--config` 装入相同的 stats、dir、box、modified-star 插件。提示符 `svg>`，`help` 查看语法；双引号处理空格参数，`#` 开头整行是注释。
 
 ```text
-init 400 200
-create g scene
-create rect r1 30 50 120 60 #4a90d9 in scene
-create text title 45 85 "开始" in scene
-move scene 20 0
-undo
-save demo.svg
+init 800 600
+create box start 120 100 160 60 "开始"
+set start label "处理数据"
+stats
+dir
+tree
 ```
 
-生成的 SVG 可以直接在浏览器打开。完整示例和验证命令：
+运行上例需要启用插件。禁用新增插件后，CLI 的输出与 Phase 1 final 保持一致。
 
 ```sh
-npm run demo
-npm run demo -- examples/session.txt
 npm run check
+npm run test:plugins
+npm run test:plugin -- box
+npm run build:extension
+npm run verify:compatibility
+npm run verify:git
 ```
 
-demo 脚本跨平台执行，自动创建 `examples/generated/`。session 示例包含两条预期错误，用于演示非法分组和保存后的历史屏障。仅支持本阶段六种图形；box 属后续插件阶段。
+用 VSCode 打开仓库，选 **SVG Mark and Outline** 调试配置并按 F5。步骤、示例及模式分析见 [扩展说明](vscode-extension/README.md)。
 
-架构方案、PlantUML 图、开发过程、一致性自查、功能验收及质量保证见 [doc/README.md](doc/README.md)。验证证据见 [doc/verification.md](doc/verification.md)，逐条复核结果见 [doc/requirements-audit.md](doc/requirements-audit.md)。
+[项目文档](doc/README.md) · [逐项验收](doc/phase2-audit.md) · [验证记录](doc/verification/phase2.json) · [Git 指标](docs/metrics/README.md)
 
-逐步开发提交保存在 Git 历史中，最终版本由附注标签 `final` 标记。
+当前代码与自动化验证已完成；真实 VSCode 交互观察及运行截图待补。旧 final/final-initial 保持原位，最终 p2 尚未创建，避免补材料时移动标签。当前版本是阶段交付，不标记为完整作业最终版。

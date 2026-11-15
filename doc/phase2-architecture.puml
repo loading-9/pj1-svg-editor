@@ -1,0 +1,48 @@
+@startuml
+!pragma layout smetana
+title PJ1 Phase 2 - dependency direction
+skinparam componentStyle rectangle
+component "CLI\nRepl / Tokenizer / main" as cli
+component "Host / composition root\nDefaults / codePlugins / PluginLoader\nRegistration transactions" as host
+package "Kernel" {
+  component "Application\nEditorContext / Editor / History\nCommandRegistry / ShapeFactory / TreeRenderer" as app
+  component "Public plugin API\nShapeProvider / Command\nTreeDecorator / AttributeHandler\nPluginContext" as api <<interface>>
+  component "Domain\nShape / GeometryShape / Group\nSvgDocument / AffineTransform" as domain
+  component "SvgStore" as storage <<interface>>
+}
+component "Storage adapters\nSvgCodec / FileSvgStore" as infra
+package "Plugin packages" {
+  component "builtin-shapes\nbuiltin-commands" as builtin
+  component "stats / dir\nbox / tree-star" as optional
+  component "DirectoryReader" as dirport <<interface>>
+  component "NodeDirectoryReader" as nodefs
+}
+component "VSCode extension\nOutlineParser\nFileDecoration / DocumentSymbol adapters" as vscode
+component "VSCode host\nExplorer / native Outline / editor" as ide
+cli --> host
+cli --> app
+host --> builtin : code composition
+host --> optional : code or generic config loading
+host --> api : transactional registration
+host --> infra
+builtin --> api
+optional --> api
+app --> api
+app --> domain
+app --> storage
+infra ..|> storage
+infra --> domain
+infra --> app : ShapeFactory only
+optional --> dirport
+nodefs ..|> dirport
+vscode --> ide : register providers
+ide --> vscode : callback
+note bottom of api
+  No kernel imports a plugin or host.
+  Optional plugins import only the public API.
+end note
+note bottom of vscode
+  Independent source-position model;
+  no CLI model or command dependency.
+end note
+@enduml
