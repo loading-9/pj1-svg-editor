@@ -2,7 +2,7 @@
 
 TypeScript 面向对象实现的 SVG 编辑器。Phase 2 保留 Phase 1 行为，将图形、命令、树标签和属性语义开放为插件，并提供独立的 VSCode 文件标记与原生大纲扩展。
 
-当前状态：CLI 和提供器自动化验证已完成；VSCode 真实交互观察与运行截图仍待补齐。已有 final/final-initial 标签保持原位；材料齐备前不创建最终 p2。截图状态见 [截图清单](screenshots/README.md)。
+CLI 自动化验证和 VSCode 实机验证已完成。[截图与操作结果](screenshots/README.md)
 
 ## 运行与装配
 
@@ -134,7 +134,7 @@ VSCode 管理原生 Explorer/Outline、文档变更调度、源码定位与 Disp
 
 文件装饰在效果上类似 Decorator，但没有包装同接口 Component；DocumentSymbolProvider 明确把解析结果适配为 VSCode 类型。Phase 1 SvgCodec 会补 ID、限制元素并丢失源码偏移，不能直接用于编辑过程的大纲，因此复用 Composite 遍历思路，另建位置树。扩展与 CLI 源码没有耦合。
 
-真实原生 Outline 观察、文件标记截图、定位/编辑/异常恢复截图仍待补，详见 [截图清单](screenshots/README.md)。没有将提供器替身测试称作 VSCode 真实运行验证。
+实机验证覆盖原生大纲对照、文件标记、源码定位、编辑更新和错误恢复。[截图与操作结果](screenshots/README.md)
 
 ## AI 协作中的检查与修正
 
@@ -150,7 +150,7 @@ VSCode 管理原生 Explorer/Outline、文档变更调度、源码定位与 Disp
 | dirty 若只记录发生过编辑就无法识别 undo 回保存点 | 改为保存快照内容比较，在标签实例封装缓存；独立状态机和真实 Editor 的保存/撤销测试覆盖 |
 | 树标签测试的注册替身最初返回了对象，违反 void 类型契约 | 严格编译发现，单独后续提交修正替身；没有重写前一提交。最终全部检查通过 |
 | 扩展打包初稿依赖当前工作目录，从其他目录调用失败 | 改为相对脚本 URL 定位项目根；独立构建输出仅保留外部 vscode API，由宿主提供 |
-| GUI 验证不能由解析测试推断 | 将真实观察/截图明确列为待补，未生成或冒充运行截图；最终标签等材料齐备后再创建 |
+| Outline 跳转可能重开 SVG 图片预览 | 用示例工作区设置关联文本编辑器，重新验证 rect#start 跳到第 3 行第 6 列 |
 
 ## 一致性与质量保证
 
@@ -170,7 +170,7 @@ npm run verify:git
 - dir 覆盖混合项、隐藏项、空目录、稳定排序、失败和真实临时文件系统，以及无文档/历史不变。
 - 加载器覆盖指定四条错误、重复、回滚、继续加载、配置路径、包名、options、disabled、非法配置、异步拒绝与不合法接口。
 - 属性处理覆盖默认白名单、多命中、双部件单单元撤销/重做、部分失败与无副作用判断；标签覆盖 dirty 状态机及组合。
-- VSCode 提供器自动化覆盖嵌套/无 ID/源码位置/更新/不完整 XML/恢复/装饰筛选/注册释放；真实 GUI 仍待补。
+- VSCode 提供器自动化覆盖嵌套/无 ID/源码位置/更新/不完整 XML/恢复/装饰筛选/注册释放。实机证据另见截图记录。
 
 [compatibility.json](transcript/compatibility.json) 记录 final 基线独立编译以及三份双装配会话的逐字节结果。命令输入为纯命令/注释，不含提示符或输出；同名 code/config.out.txt 为输出。基础输入引用的 SVG 是 [examples/other.svg](../examples/other.svg)。dir 会话在固定临时目录运行，所有日志存到目录外，不由日志改变目录列表。
 
@@ -186,7 +186,7 @@ npm run verify:git
 node scripts/metrics.mjs --to p2 --label p2
 ```
 
-在 p2 尚未创建期间，当前指标以最新代码提交为对象、标签名 phase2-code；不冒称已经存在 p2。最终补齐截图后按相同脚本重生成标签比较。
+指标对应 `p2` 的生产 TypeScript 文件。
 
 ### Git 与交付状态
 
@@ -195,7 +195,7 @@ node scripts/metrics.mjs --to p2 --label p2
 | 提交 | 过程节点与证据 |
 |---|---|
 | f590325 | Phase 2 方案和分步验证规划 |
-| 3196d48 | VSCode 扩展源码、示例、独立构建及提供器测试（GUI 材料待补） |
+| 3196d48 | VSCode 扩展源码、示例、独立构建及提供器测试 |
 | 8f52331 | 四个扩展点、通用加载事务、内置插件化、第一份指标及 final 基线对照 |
 | 61f5d47 | stats/dir 插件、目录端口与 Node 适配器、独立及真实 IO 测试 |
 | 2a02cc0 | box 代码装配 A：只新增 box 包、测试，改一个 codePlugins 顶层文件 |
@@ -211,7 +211,7 @@ git diff --name-status 3a22dba^ 3a22dba
 node scripts/verify-git-boundaries.mjs
 ```
 
-旧标签对象：final 为 a00e3f227274f3f792efee91c8c46d35f2b4cff3；final-initial 为 0d1371d9c5dc9e432334cb7f905e202e117865d6。过程节点使用普通提交，没有新增阶段 tag。最终 p2 尚未创建；需要补齐真实 VSCode 观察、运行截图并确认材料后，在最后提交上一次创建并推送，不移动已有标签。代码及文档的阶段提交可先推送 main，不等同于课程平台提交。
+旧标签对象：final 为 a00e3f227274f3f792efee91c8c46d35f2b4cff3；final-initial 为 0d1371d9c5dc9e432334cb7f905e202e117865d6。最终提交使用本地 `p2` 标签，远程发布暂缓。
 
 ### 变化点与限制
 

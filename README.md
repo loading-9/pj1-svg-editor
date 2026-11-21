@@ -36,4 +36,4 @@ npm run verify:git
 
 [项目文档](doc/README.md) · [逐项验收](doc/phase2-audit.md) · [验证记录](doc/verification/phase2.json) · [Git 指标](docs/metrics/README.md)
 
-当前代码与自动化验证已完成；真实 VSCode 交互观察及运行截图待补。旧 final/final-initial 保持原位，最终 p2 尚未创建，避免补材料时移动标签。当前版本是阶段交付，不标记为完整作业最终版。
+VSCode 实机记录见 [截图与操作结果](doc/screenshots/README.md)。Phase 2 最终版本使用本地标签 `p2`。

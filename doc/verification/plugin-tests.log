@@ -1,10 +1,10 @@
-✔ box independently registers all three roles and uses only public shape construction context (2.4479ms)
-✔ builtin command plugin independently composes commands through public services (2.4432ms)
-✔ builtin shapes plugin independently registers and creates/reads all six providers (2.7822ms)
-✔ dir independently uses directory port: mixed items, hidden entries, stable sorting, empty and failure (2.5719ms)
-✔ dir real adapter lists direct children and reports IO failure without changing cwd (2.9908ms)
-✔ stats independently counts DFS leaves in first-seen order and containers excluding SVG (1.7733ms)
-✔ modified-star independent state machine: edit/save/edit/undo snapshot, new nodes, ancestors and instance isolation (1.8836ms)
+✔ box independently registers all three roles and uses only public shape construction context (3.1171ms)
+✔ builtin command plugin independently composes commands through public services (2.8883ms)
+✔ builtin shapes plugin independently registers and creates/reads all six providers (3.6125ms)
+✔ dir independently uses directory port: mixed items, hidden entries, stable sorting, empty and failure (2.6927ms)
+✔ dir real adapter lists direct children and reports IO failure without changing cwd (2.5345ms)
+✔ stats independently counts DFS leaves in first-seen order and containers excluding SVG (2.0831ms)
+✔ modified-star independent state machine: edit/save/edit/undo snapshot, new nodes, ancestors and instance isolation (1.9845ms)
 ℹ tests 7
 ℹ suites 0
 ℹ pass 7
@@ -12,4 +12,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 131.6362
+ℹ duration_ms 118.4973

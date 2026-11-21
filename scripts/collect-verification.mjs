@@ -19,5 +19,5 @@ for(const [name,args] of steps){
  results.push({name,command:['node',...args].join(' '),exitCode:result.status,tests:Number(output.match(/ℹ tests (\d+)/)?.[1]??0)});
  if(result.status!==0){console.error(output);throw new Error('Verification failed: '+name);}
 }
-writeFileSync(directory+'/phase2.json',JSON.stringify({date:'2026-11-15',node:process.version,typescript:ts.version,results,manualVSCodeEvidence:'pending',p2Tag:'not yet created'},null,2)+'\n');
-console.log('Collected verification logs; '+results.find(r=>r.name==='tests').tests+' tests passed. Real VSCode screenshots remain pending.');
+writeFileSync(directory+'/phase2.json',JSON.stringify({date:new Date().toISOString().slice(0,10),node:process.version,typescript:ts.version,results,manualVSCodeEvidence:'doc/screenshots/README.md'},null,2)+'\n');
+console.log('Collected verification logs; '+results.find(r=>r.name==='tests').tests+' tests passed.');

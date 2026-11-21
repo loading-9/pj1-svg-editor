@@ -1,6 +1,6 @@
 {
   "baseline": "final",
-  "target": "phase2-code",
+  "target": "p2",
   "method": "Physical TS lines including comments/blanks. Complexity=sum(function baselines + if/loops/catch/ternary/case/&&/||/?? decisions). CLI adapters and host count as assembly. Dependencies, output, tests and scripts excluded. VSCode separate.",
   "summary": [
     {

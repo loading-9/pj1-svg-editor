@@ -16,7 +16,7 @@
 2. 以文本编辑器打开 example.svg（如果默认预览，选择“Reopen Editor With → Text Editor”）。展开原生 Outline 的 svg → g#flow → rect#start/g#nested → text。点击 rect#start，确认源码定位到第 3 行，再截图。
 3. 将 start 改为 renamed，观察大纲更新；临时删去结束标签或输入 `<g`，大纲应清空且宿主继续响应。补回合法 XML 后大纲恢复。记录恢复过程并截图，最后还原文件。
 
-当前自动化验证覆盖解析位置、嵌套、无 ID、编辑重解析、异常 XML、注册与释放，以及文件/目录装饰筛选。真实 VSCode 界面截图待手动验证补齐；自动化提供器测试不等于已完成真实界面验收。
+自动化验证覆盖解析位置、嵌套、无 ID、编辑重解析、异常 XML、恢复、注册与装饰筛选。实机跳转使用示例工作区的 SVG 文本编辑器关联。[截图与操作结果](../doc/screenshots/README.md)
 
 ## 模式与职责
 

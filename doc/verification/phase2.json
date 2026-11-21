@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-15",
-  "node": "v24.22.1",
+  "date": "2026-11-21",
+  "node": "v24.22.3",
   "typescript": "5.9.3",
   "results": [
     {
@@ -52,6 +52,6 @@
       "tests": 0
     }
   ],
-  "manualVSCodeEvidence": "pending",
-  "p2Tag": "not yet created"
+  "manualVSCodeEvidence": "doc/screenshots/README.md",
+  "p2Tag": "local"
 }

@@ -1,13 +1,10 @@
-# VSCode 真实运行证据：待补齐
+# VSCode 实机验证
 
-本目录尚无运行截图。提供器单元测试和扩展构建已经通过，但没有将其当成真实界面验收。
+2026-11-21，Windows，VSCode 1.146.0。扩展从源码构建产物加载到独立的 Extension Development Host。示例使用临时副本，验证后与仓库原件逐字节相同。
 
-请按 [扩展运行说明](../../vscode-extension/README.md) 自行启动并验证。需要保存：
+- [原生大纲对照](native-markdown-outline.png)：未加载 SVG 扩展的窗口中，VSCode 原生 Outline 按 Markdown 标题展示层级。
+- [Explorer 标记](svg-badge.png)：只有 `example.svg` 显示 `[]`，`notes.txt` 和同样以 .svg 结尾的目录没有标记。
+- [Outline 与定位](svg-outline-location.png)：依次显示 SVG 根、嵌套分组、带 ID 的矩形及无 ID 的 text。点击 rect#start 后，光标到第 3 行第 6 列。
+- [更新](svg-outline-updated.png)、[无效 XML](svg-outline-invalid.png)、[恢复](svg-outline-recovery.png)：在未保存的编辑缓冲区把矩形 ID 改为 renamed，大纲立即更新。替换为不完整 XML 后，Outline 显示无符号。重新输入合法 XML 后，大纲恢复。
 
-1. `svg-badge.png`：Explorer 中 example.svg 显示 []，notes.txt 和 folder.svg 目录无标记，文件名未改。
-2. `svg-outline-location.png`：原生 Outline 展开嵌套、无 ID 的 text；点击 rect#start 后定位第 3 行。
-3. `svg-outline-recovery.png`：编辑后更新，以及不完整 XML 清空、恢复合法 XML 后继续工作。可以补一份简短的实际操作记录说明截图前后的动作。
-
-还需先观察未装此插件时 TypeScript 文件的原生 Outline，记录层级、点击定位、编辑更新的行为。此前只定位到 Outline 入口，尚未完成该观察，不能记为已完成。
-
-截图必须来自真实 VSCode；不生成示意截图。材料补齐前不创建最终 p2 标签，避免后续为补图而移动标签。
+如果 VSCode 默认使用图片预览，打开示例目录作为工作区，其设置会将 SVG 关联到文本编辑器。其他工作区也可以使用同一个编辑器关联。验证发现仅临时切到文本编辑器时，Outline 跳转可能重新打开图片预览。
