@@ -1,1 +1,13 @@
-{ "plugins": [{"module":"./plugins/stats"},{"module":"./plugins/dir"}] }
+{
+  "plugins": [
+    {
+      "module": "./plugins/stats"
+    },
+    {
+      "module": "./plugins/dir"
+    },
+    {
+      "module": "./plugins/box"
+    }
+  ]
+}
